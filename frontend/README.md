@@ -23,9 +23,9 @@ asistente; el resto de la página no lo necesita.
 
 ## Despliegue en Vercel
 
-1. Importa el repositorio de GitHub en Vercel y configura `frontend` como
-   **Root Directory**. Vercel detecta Vite; el comando de build es
-   `npm run build` y la salida es `dist`.
+1. Importa el repositorio de GitHub en Vercel y deja **Root Directory** en `.`
+   (la raíz). El `vercel.json` de la raíz instala dependencias desde
+   `frontend/`, ejecuta el build y publica `frontend/dist/`.
 2. En las variables de entorno del proyecto Vercel, configura
    `VITE_API_BASE_URL` con el origen HTTPS público del backend, sin `/` final
    (por ejemplo, `https://api.ejemplo.com`). Es una URL pública, no una clave.
