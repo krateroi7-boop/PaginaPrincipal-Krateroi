@@ -1,0 +1,19 @@
+node_modules
+dist
+
+# Clave: sin esto, el .env.local de desarrollo entraría al contexto y
+# Vite lo leería con prioridad sobre el de producción, dejando
+# http://localhost:3000 escrito dentro del paquete que descarga el
+# visitante de la VPS.
+.env
+.env.*
+!.env.example
+
+Dockerfile
+.dockerignore
+README.md
+.git
+.gitignore
+
+# La genera el build a partir del dist
+nginx/csp.conf
