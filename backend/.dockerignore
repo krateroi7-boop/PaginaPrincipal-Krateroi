@@ -1,0 +1,17 @@
+node_modules
+dist
+*.tsbuildinfo
+coverage
+
+# Las credenciales entran por variables de entorno del contenedor, no
+# copiadas dentro de la imagen: una imagen se publica, un .env no.
+.env
+.env.*
+!.env.example
+
+docker-compose.yml
+Dockerfile
+.dockerignore
+README.md
+.git
+.gitignore
