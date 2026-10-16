@@ -22,29 +22,6 @@ El proceso **falla al arrancar** si falta una variable de entorno requerida
 (`src/common/config/validation.schema.ts`, validado con Joi) — es intencional,
 para no correr con credenciales a medias.
 
-## Despliegue del backend
-
-El frontend estático se despliega en Vercel, pero esta API NestJS debe correr
-como un servicio de contenedor persistente aparte; no forma parte del build
-estático de Vercel. En el proveedor de backend, configura `backend/` como
-directorio de la aplicación y usa el `Dockerfile` incluido (puerto `3000`).
-También se puede desplegar la imagen con cualquier plataforma que admita
-contenedores Docker.
-
-Provisiona Redis y configura `REDIS_URL` (`rediss://` si el servicio exige
-TLS). Para Postgres, configura `DATABASE_URL`; aunque hoy los endpoints no
-dependen de la base, la conexión se inicializa al arrancar. Define además:
-
-- `PORT`: el puerto que indique el proveedor (normalmente `3000`).
-- `CORS_ORIGIN`: el origen HTTPS exacto del sitio en Vercel, sin barra final.
-- `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`: credenciales privadas del bot.
-- `GEMINI_API_KEY`: credencial privada del asistente.
-
-Guarda estas credenciales sólo en el gestor de variables/secretos del servicio
-backend. Nunca las pongas en Git ni en variables `VITE_*`. Cuando el backend
-tenga una URL pública HTTPS, configura esa URL en Vercel como
-`VITE_API_BASE_URL` y vuelve a desplegar el frontend.
-
 ## Variables de entorno
 
 | Variable | Uso |
@@ -55,8 +32,6 @@ tenga una URL pública HTTPS, configura esa URL en Vercel como
 | `GEMINI_API_KEY` | Clave del asistente (Google AI Studio) |
 | `REDIS_HOST` / `REDIS_PORT` | Conexión de BullMQ (`docker-compose.yml`) |
 | `POSTGRES_HOST` / `POSTGRES_PORT` / `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | Conexión de TypeORM (`docker-compose.yml`) |
-| `REDIS_URL` | URL Redis administrada (`redis://` o `rediss://`) |
-| `DATABASE_URL` | URL Postgres administrada (`postgres://` o `postgresql://`) |
 
 Ninguna de estas puede existir en el frontend: Vite escribe sus variables
 literales dentro del paquete que descarga el visitante.

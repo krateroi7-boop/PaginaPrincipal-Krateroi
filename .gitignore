@@ -6,13 +6,16 @@ backend/.env*
 
 # Variables del despliegue en VPS
 .env.prod
+/.env
+/.env.*
+!/.env.prod.example
 
 # Caché de compilación incremental de TypeScript
 *.tsbuildinfo
 
 frontend/dist/
-frontend/.env
-frontend/.env.local
+frontend/.env*
+!frontend/.env.example
 
 # Preferencias del editor: son de cada equipo, no del proyecto
 .vscode/

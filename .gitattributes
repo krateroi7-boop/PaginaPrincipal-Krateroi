@@ -1,0 +1,7 @@
+# Finales de línea LF en el repositorio y en la copia de trabajo,
+# para que editar desde Windows no genere diffs falsos.
+* text=auto eol=lf
+
+*.jpeg binary
+*.jpg  binary
+*.png  binary

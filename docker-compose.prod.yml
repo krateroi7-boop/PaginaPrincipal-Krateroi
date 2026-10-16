@@ -1,0 +1,113 @@
+# Despliegue en VPS: el sitio y el backend, hablando por HTTP.
+#
+#   navegador  --http--> :80 nginx (web) --http--> backend:3000
+#                                        \-------> redis / postgres
+#
+# Sólo `web` publica un puerto. El backend, Redis y Postgres viven en la
+# red interna de Docker y no son alcanzables desde fuera de la VPS: lo
+# que el visitante ve es un único origen HTTP.
+#
+#   cp .env.prod.example .env.prod   # y completar
+#   docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
+
+name: krateroi
+
+x-logs: &logs
+  # Sin esto, el log de un contenedor crece sin techo y termina llenando
+  # el disco de la VPS.
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    logging: *logs
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks: [interna]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    logging: *logs
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [interna]
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    logging: *logs
+    environment:
+      PORT: 3000
+      # El origen desde el que el navegador carga el sitio. Con el proxy
+      # de nginx las peticiones son del mismo origen y CORS no se activa;
+      # queda igual configurado para que una llamada desde otro dominio
+      # sí se rechace.
+      CORS_ORIGIN: ${PUBLIC_ORIGIN}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      # Dentro de la red de Docker el host es el nombre del servicio, no
+      # localhost: localhost dentro de un contenedor es ese contenedor.
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [interna]
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        # Compilado dentro del paquete: si cambia el dominio, se
+        # reconstruye la imagen.
+        VITE_API_BASE_URL: ${PUBLIC_ORIGIN}
+        VITE_WHATSAPP: ${VITE_WHATSAPP}
+        VITE_WHATSAPP_VISIBLE: ${VITE_WHATSAPP_VISIBLE}
+        VITE_CORREO: ${VITE_CORREO}
+        VITE_MENSAJE_WHATSAPP: ${VITE_MENSAJE_WHATSAPP}
+    restart: unless-stopped
+    logging: *logs
+    ports:
+      - "${PUBLIC_PORT:-80}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [interna]
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  interna:
+    driver: bridge

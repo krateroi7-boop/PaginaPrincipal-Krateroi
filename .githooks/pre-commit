@@ -1,0 +1,66 @@
+#!/bin/sh
+# ─────────────────────────────────────────────────────────────
+# Corta el commit si algo con pinta de credencial entró al índice.
+#
+# La primera defensa es .gitignore, que deja fuera backend/.env y
+# frontend/.env.local. Esto es la segunda: cubre renombrar el
+# archivo, pegar un token dentro de otro, o forzar un `git add -f`.
+#
+# Para activarlo, una vez por clon:
+#     git config core.hooksPath .githooks
+#
+# Para saltarlo en un caso concreto (asegúrate de mirarlo antes):
+#     git commit --no-verify
+# ─────────────────────────────────────────────────────────────
+
+archivos=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$archivos" ] && exit 0
+
+encontrado=0
+
+for f in $archivos; do
+  [ -f "$f" ] || continue
+
+  # Ningún archivo de entorno se versiona, salvo la plantilla vacía
+  case "$f" in
+    *.example|*.example.*) ;;
+    .env|.env.*|*/.env|*/.env.*)
+      echo "  $f  no debe versionarse: los archivos de entorno llevan las credenciales"
+      encontrado=1
+      continue
+      ;;
+  esac
+
+  # Token de bot de Telegram: 8-10 dígitos, dos puntos, 35 caracteres
+  if git show ":$f" 2>/dev/null | grep -qE '[0-9]{8,10}:[A-Za-z0-9_-]{35}'; then
+    echo "  $f  contiene algo con forma de token de Telegram"
+    encontrado=1
+  fi
+
+  # Claves de Google AI Studio, en sus dos formatos
+  if git show ":$f" 2>/dev/null | grep -qE 'AIza[A-Za-z0-9_-]{35}|AQ\.[A-Za-z0-9_-]{20,}'; then
+    echo "  $f  contiene algo con forma de clave de Gemini"
+    encontrado=1
+  fi
+
+  # Un valor largo escrito a mano junto a un nombre de credencial.
+  # Se exige que esté entrecomillado: así `config.get('TELEGRAM_BOT_TOKEN')`
+  # o `import.meta.env.VITE_X` no saltan, porque son referencias y no
+  # el secreto en sí.
+  if git show ":$f" 2>/dev/null | grep -qiE '(api[_-]?key|secret|token|password|passwd|clave)[a-z_]*["'\'' ]*[:=][ ]*["'\''][A-Za-z0-9_.-]{20,}["'\'']'; then
+    echo "  $f  asigna un valor largo a algo llamado clave, token o secreto"
+    encontrado=1
+  fi
+done
+
+if [ "$encontrado" -ne 0 ]; then
+  echo ""
+  echo "Commit detenido: parece haber una credencial en los cambios."
+  echo "Sácala del archivo y déjala en backend/.env, que está en .gitignore,"
+  echo "o en las variables de entorno del hosting."
+  echo ""
+  echo "Si es una falsa alarma: git commit --no-verify"
+  exit 1
+fi
+
+exit 0
