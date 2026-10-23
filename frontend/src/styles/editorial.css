@@ -56,7 +56,7 @@ body { background: #03194f; }
 .compacta .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 2rem; }
 .stack-marquee { overflow: visible; }
 .stack-track { transform: none !important; animation: none !important; display: block; width: auto; }
-.stack-group { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+.stack-group { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.4rem; }
 .stack-group[aria-hidden="true"] { display: none; }
 .stack-group span { color: #173b70; font-size: .82rem; font-weight: 600; }
 
