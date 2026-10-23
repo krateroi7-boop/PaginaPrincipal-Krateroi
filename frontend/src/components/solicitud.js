@@ -132,6 +132,13 @@ export function iniciarSolicitud() {
     });
   });
 
+  $$('[data-ir-servicio]', form).forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const destino = document.getElementById(boton.dataset.irServicio);
+      destino?.scrollIntoView({ block: 'start', behavior: 'auto' });
+    });
+  });
+
   /* -- PROBLEMAS DE LA SECCIÓN "PROBLEMAS" --------------------
      Las fichas de más arriba y las tarjetas del paso 4 son la misma
      lista: marcar en una deja marcada la otra, para que nadie tenga
