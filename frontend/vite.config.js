@@ -1,11 +1,13 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { resolve } from 'node:path';
+import { seo } from './seo/plugin.js';
 
 if (process.env.VERCEL && !process.env.VITE_API_BASE_URL?.trim()) {
   throw new Error('Configura VITE_API_BASE_URL en las variables del proyecto Vercel.');
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  plugins: [seo(loadEnv(mode, __dirname, ''))],
   build: {
     rollupOptions: {
       input: {
@@ -14,4 +16,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

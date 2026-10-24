@@ -69,7 +69,9 @@ Están acordadas con el cliente. No revertirlas sin que las levante:
 
 - **Sin logotipo ni nombre de marca visible.** Donde iría el logo hay casillas de
   reserva punteadas con un aspa, como en cualquier wireframe.
-- **Sin precios, sin trabajos anteriores, sin testimonios ni clientes inventados.**
+- **Sin trabajos anteriores, sin testimonios ni clientes inventados.** Los
+  precios sí se publican desde octubre de 2026: en UF, salvo los trabajos
+  pequeños, que van en pesos, y la auditoría inicial, que es gratuita.
 - **Sin inicio de sesión, registro ni cuentas.** El sitio no crea usuarios ni
   guarda sesiones.
 - **Liviano.** Llega tráfico desde redes sociales: la portada no hace ninguna
@@ -248,10 +250,36 @@ reserva. Se reparten al cargar desde variables de entorno.
 | Razón social y datos tributarios | `terminos.html`, secciones 01 y 18 |
 | Credenciales de Telegram y del asistente | `backend/.env` — nunca en el frontend |
 | Dominio permitido por CORS | `backend/.env` (`CORS_ORIGIN`) |
+| Precios y plazos | `frontend/seo/precios.js` — la tabla y los datos estructurados salen de ahí |
+| Verificación de buscadores | Variables del proyecto en Vercel: `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` |
 
 Las variables `VITE_` no son un escondite: Vite las escribe literales en el
 paquete que descarga el visitante. Sirven para centralizar datos que de todas
 formas son públicos, no para guardar secretos.
+
+## Buscadores
+
+El plugin `frontend/seo/plugin.js` hace en cada build lo que Vite no hace solo:
+
+- Escribe la dirección pública donde el HTML dice `%SITE_URL%` (canonical y
+  Open Graph). Sale de `SITE_URL` si está definida; si no, del dominio de
+  producción que Vercel entrega en `VERCEL_PROJECT_PRODUCTION_URL`. Al conectar
+  un dominio propio, el siguiente despliegue lo toma sin tocar código. El build
+  de Docker no la recibe y usa la de Vercel, que es justo lo que se quiere: una
+  sola dirección canónica.
+- Genera la tabla de `#precios` y el catálogo de servicios en JSON-LD desde
+  `seo/precios.js`. Los montos en UF van con el código ISO `CLF`.
+- Agrega `google-site-verification` y `msvalidate.01` si sus variables existen.
+- Publica `robots.txt`, `sitemap.xml` y la clave de IndexNow en la raíz.
+
+Para que el sitio aparezca en Google hay que darlo de alta una vez en
+[Search Console](https://search.google.com/search-console): propiedad de
+tipo *prefijo de URL*, verificación por etiqueta HTML (el código va en
+`GOOGLE_SITE_VERIFICATION` y se redespliega), y después *Sitemaps* →
+`sitemap.xml` e *Inspección de URL* → *Solicitar indexación*. Bing Webmaster
+Tools puede importar la propiedad desde Search Console. Tras cada despliegue con
+cambios de contenido, `npm run indexnow` (en `frontend/`) avisa a Bing y a los
+buscadores que usan IndexNow.
 
 ## Despliegue en VPS con Docker
 

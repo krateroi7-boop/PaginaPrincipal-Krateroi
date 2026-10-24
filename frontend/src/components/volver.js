@@ -33,7 +33,7 @@ export function iniciarVolver() {
   const paso = parseInt(guardado && guardado.paso, 10);
   if (!guardado || !(paso >= 1 && paso <= 4)) return;
 
-  boton.href = 'index.html?solicitud=retomar#contacto';
+  boton.href = '/?solicitud=retomar#contacto';
   boton.textContent = 'Volver a la solicitud';
   if (flecha) {
     flecha.href = boton.href;

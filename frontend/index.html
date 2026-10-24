@@ -1,25 +1,38 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-CL">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Krateroi | Tecnología y apoyo legal para empresas</title>
-<meta name="description" content="Apoyo digital y legal para empresas: software, IA, auditorías legales digitales, protección de datos personales, ciberseguridad e infraestructura." />
+<title>Krateroi | Auditoría legal y auditoría digital en Chile</title>
+<meta name="description" content="Auditoría legal digital, auditoría de procesos y sistemas, adecuación a la Ley 21.719, software e IA para empresas en Chile. Auditoría inicial gratis y precios en UF." />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<link rel="canonical" href="%SITE_URL%/" />
 <meta name="theme-color" content="#021B59" />
+<!-- verificaciones -->
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_CL" />
-<meta property="og:title" content="Krateroi | Tecnología y apoyo legal para empresas" />
-<meta property="og:description" content="Software, IA y apoyo en derecho digital para la operación de tu empresa." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:site_name" content="Krateroi" />
+<meta property="og:url" content="%SITE_URL%/" />
+<meta property="og:title" content="Krateroi | Auditoría legal y auditoría digital" />
+<meta property="og:description" content="Auditamos tus procesos digitales y sus riesgos legales, y construimos el software y la IA que hagan falta. La auditoría inicial es gratis." />
+<meta property="og:image" content="%SITE_URL%/assets/images/og-krateroi.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Krateroi: auditoría legal y auditoría digital para empresas en Chile" />
+<meta name="twitter:card" content="summary_large_image" />
 
-<link rel="icon" type="image/png" href="/assets/images/krateroi-icon.png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" href="/assets/images/krateroi-icon.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 <link rel="stylesheet" href="/src/styles/variables.css" />
 <link rel="stylesheet" href="/src/styles/styles.css" />
 <link rel="stylesheet" href="/src/styles/remake.css" />
 <link rel="stylesheet" href="/src/styles/editorial.css" />
+<link rel="stylesheet" href="/src/styles/oferta.css" />
 
+<!-- datos-estructurados -->
 </head>
 <body>
 
@@ -29,13 +42,14 @@
 <header id="topbar" class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="#inicio" aria-label="Volver al inicio">
-      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="2172" height="724" />
+      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="720" height="240" />
     </a>
 
     <nav class="topbar-nav" aria-label="Navegación principal">
+      <a href="#servicios">Auditorías</a>
       <a href="#soluciones">Digital y técnico</a>
       <a href="#apoyo-legal">Legal</a>
-      <a href="#metodologia">Metodología</a>
+      <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </nav>
 
@@ -51,13 +65,13 @@
   <nav id="menuMovil" class="mobile-menu" aria-label="Menú móvil">
     <div class="container">
       <ul>
-        <li><a href="#servicios">Enfoques</a></li>
+        <li><a href="#servicios">Auditoría digital y legal</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#problemas">Problemas</a></li>
         <li><a href="#soluciones">Apoyo digital y técnico</a></li>
         <li><a href="#apoyo-legal">Apoyo legal</a></li>
         <li><a href="#metodologia">Metodología</a></li>
-        <li><a href="#diagnostico">Diagnóstico inicial</a></li>
+        <li><a href="#precios">Precios</a></li>
         <li><a href="#condiciones">Condiciones</a></li>
         <li><a href="#preguntas">Preguntas frecuentes</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -72,11 +86,11 @@
   <section id="inicio" class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <h1 class="h-display reveal d1">Tecnología y apoyo legal para tu operación.</h1>
-        <p class="lead reveal d1">Desarrollamos software e IA, auditamos procesos digitales y abordamos los riesgos legales de datos, contratos y ciberseguridad.</p>
+        <h1 class="h-display reveal d1">Auditoría legal y digital para tu empresa.</h1>
+        <p class="lead reveal d1">En Krateroi revisamos tus procesos digitales y sus riesgos legales en datos personales, contratos y ciberseguridad. Después construimos el software, la automatización o la IA que haga falta.</p>
         <div class="hero-actions reveal d2">
-          <a class="btn btn-primary btn-lg" href="#contacto" data-abre-solicitud>Cuéntanos tu proceso <span class="arrow" aria-hidden="true">-&gt;</span></a>
-          <a class="btn btn-outline btn-lg" href="#metodologia">Ver metodología</a>
+          <a class="btn btn-primary btn-lg" href="#contacto" data-abre-solicitud>Pedir auditoría inicial gratis <span class="arrow" aria-hidden="true">-&gt;</span></a>
+          <a class="btn btn-outline btn-lg" href="#precios">Ver precios</a>
         </div>
       </div>
       <figure class="hero-example reveal d2">
@@ -91,33 +105,23 @@
     </div>
   </section>
 
-  <section id="servicios" class="section core-services">
+  <section id="servicios" class="section core-services" aria-labelledby="auditorias-titulo">
     <div class="container">
       <div class="section-head reveal">
-        <h2 class="h-section">Apoyo digital y legal, desde el diagnóstico hasta la puesta en marcha.</h2>
+        <h2 id="auditorias-titulo" class="h-section">Auditoría digital y auditoría legal, hechas por el mismo equipo.</h2>
       </div>
-      <div class="core-grid">
-        <article class="core-card reveal">
-          <h3>Auditar la operación</h3>
-          <p>Revisamos flujos, herramientas, datos y obligaciones aplicables para detectar puntos de riesgo.</p>
+      <div class="auditorias">
+        <article class="auditoria reveal">
+          <h3>Auditoría digital</h3>
+          <p>Revisamos cómo circula la información entre personas, aplicaciones y bases de datos. Detectamos pasos manuales, datos duplicados y tareas que dependen de una sola persona, y entregamos un mapa del proceso con mejoras priorizadas. A veces la mejor solución es rediseñar el proceso, no comprar tecnología.</p>
+          <a class="auditoria-link" href="#soluciones">Apoyo digital y técnico <span aria-hidden="true">-&gt;</span></a>
         </article>
-        <article class="core-card reveal d1">
-          <h3>Integrar tecnologías</h3>
-          <p>Conectamos sistemas, automatizaciones y agentes de IA con reglas y responsables claros.</p>
-        </article>
-        <article class="core-card reveal d2">
-          <h3>Implementar soluciones</h3>
-          <p>Construimos software y configuramos infraestructura local según las necesidades de la empresa.</p>
-        </article>
-        <article class="core-card reveal d3">
-          <h3>Capacitar al equipo</h3>
-          <p>Enseñamos a usar los agentes y herramientas entregadas, y acompañamos su puesta en marcha.</p>
+        <article class="auditoria auditoria--legal reveal d1">
+          <h3>Auditoría legal digital</h3>
+          <p>Revisamos qué datos personales tratas y con qué base legal, las licencias y la propiedad intelectual de tu software, y las responsabilidades de tus proveedores frente a la Ley 21.719 y la Ley 21.663. También miramos las decisiones difíciles de revertir en el diseño, las bases de datos y el código.</p>
+          <a class="auditoria-link" href="#apoyo-legal">Apoyo legal <span aria-hidden="true">-&gt;</span></a>
         </article>
       </div>
-      <nav class="service-paths" aria-label="Áreas de apoyo">
-        <a class="service-path service-path--digital" href="#soluciones"><span>Apoyo digital y técnico</span><span aria-hidden="true">-&gt;</span></a>
-        <a class="service-path service-path--legal" href="#apoyo-legal"><span>Apoyo legal</span><span aria-hidden="true">-&gt;</span></a>
-      </nav>
     </div>
   </section>
 
@@ -154,7 +158,7 @@
         <h2 class="nosotros-titulo">Un equipo chico que habla con quien hace el trabajo.</h2>
       </div>
 
-      <p class="statement reveal d1">Quien conoce tu proceso también construye la solución y sigue disponible después de la entrega. Trabajamos en desarrollo, arquitectura y derecho digital: contratos tecnológicos, datos personales y ciberseguridad.</p>
+      <p class="statement reveal d1">Quien conoce tu proceso también construye la solución y sigue disponible después de la entrega. Abogados y programadores revisan el mismo sistema, así que lo técnico y lo legal se resuelven en una sola pasada.</p>
 
     </div>
   </section>
@@ -236,26 +240,10 @@
       <div class="grid g3">
         <article class="card card-lift solution reveal">
           <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9"/><path d="M14 3v5h5"/><circle cx="11.5" cy="13.5" r="2.5"/><path d="m14 16 2 2"/></svg>
-          </span>
-          <h3 class="h-card">Diagnóstico y levantamiento de procesos</h3>
-          <p>Miramos cómo trabaja tu equipo hoy, dónde se va el tiempo y qué pasos se pueden eliminar antes de automatizar nada. A veces la mejor solución es rediseñar el proceso, no comprar tecnología.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d1">
-          <span class="icon-badge" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9h4M7 12h7"/></svg>
           </span>
           <h3 class="h-card">Apoyo digital y tecnológico</h3>
           <p>Ayudamos a elegir, configurar y mejorar las herramientas de trabajo de tu empresa. Resolvemos problemas de uso e integración sin obligarte a cambiar todo el sistema.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d2">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h5l2 2h9M4 7v10h16V9M8 13l2 2 5-5"/></svg>
-          </span>
-          <h3 class="h-card">Auditorías de flujos digitales y tecnológicos</h3>
-          <p>Revisamos cómo circula la información entre personas, aplicaciones y equipos. Documentamos pasos, dependencias y riesgos, y entregamos mejoras priorizadas.</p>
         </article>
 
         <article class="card card-lift solution reveal d1">
@@ -354,8 +342,6 @@
           <li>No vendemos una herramienta específica por defecto.</li>
           <li>No tomamos trabajos que no podamos sostener después.</li>
           <li>No pedimos contraseñas ni credenciales por formulario o correo.</li>
-          <li>No automatizamos un proceso que primero conviene ordenar.</li>
-          <li>No trabajamos sin una contraparte que conozca la operación.</li>
         </ul>
       </div>
     </div>
@@ -371,25 +357,18 @@
           <span class="legal-number" aria-hidden="true">01</span>
           <div>
             <h3>Protección de datos personales</h3>
-            <p>Revisamos qué datos se recogen, quién accede a ellos, cuánto tiempo se conservan y cómo se comparten. Preparamos políticas, contratos y medidas para los cambios de la normativa chilena.</p>
+            <p>Revisamos qué datos se recogen, quién accede a ellos, cuánto tiempo se conservan y cómo se comparten. Preparamos las políticas, los contratos y las medidas que exige la Ley 21.719.</p>
           </div>
         </article>
         <article class="legal-item reveal d1">
           <span class="legal-number" aria-hidden="true">02</span>
           <div>
             <h3>Ciberseguridad legal</h3>
-            <p>Evaluamos las obligaciones que aplican a tu empresa, las responsabilidades de proveedores y los protocolos de respuesta ante incidentes.</p>
+            <p>Evaluamos qué obligaciones de la Ley Marco de Ciberseguridad aplican a tu empresa, las responsabilidades de proveedores y los protocolos de respuesta ante incidentes.</p>
           </div>
         </article>
-        <article class="legal-item reveal">
+        <article class="legal-item reveal d2">
           <span class="legal-number" aria-hidden="true">03</span>
-          <div>
-            <h3>Auditorías legales digitales</h3>
-            <p>Auditamos procesos y documentos, y revisamos decisiones duraderas en el diseño, las bases de datos y el código. Evaluamos tratamiento de datos, licencias, propiedad intelectual y responsabilidades.</p>
-          </div>
-        </article>
-        <article class="legal-item reveal d1">
-          <span class="legal-number" aria-hidden="true">04</span>
           <div>
             <h3>Contratos tecnológicos e IA</h3>
             <p>Apoyamos la revisión de acuerdos con proveedores, tratamiento de datos, propiedad intelectual y reglas para usar agentes de IA en la empresa.</p>
@@ -416,7 +395,7 @@
             </span>
             <div class="flow-text">
               <div class="flow-head"><span class="flow-no">01</span><h3>Auditoría</h3></div>
-              <p>Revisamos flujos digitales, sistemas, datos y responsabilidades con las personas que hacen el trabajo.</p>
+              <p>Partimos por la auditoría inicial, que define qué conviene revisar a fondo y qué puede esperar.</p>
               <div class="flow-out"><b>Mapa del proceso y sus puntos críticos</b></div>
             </div>
           </div>
@@ -481,57 +460,46 @@
     </div>
   </section>
 
-  <!-- == DIAGNÓSTICO == -->
-  <section id="diagnostico" class="section">
+  <!-- == PRECIOS ==
+       Las tablas salen de seo/precios.js: el plugin de seo/ escribe
+       aquí las filas y el mismo catálogo en los datos estructurados.
+       Los valores se cambian allá, no en este HTML. -->
+  <section id="precios" class="section" aria-labelledby="precios-titulo">
     <div class="container">
-      <div class="split">
-        <div>
-          <div class="section-head reveal ancha">
-            <h2 class="h-section">Diagnóstico inicial sin costo.</h2>
-          </div>
+      <div class="section-head reveal">
+        <h2 id="precios-titulo" class="h-section">Precios.</h2>
+        <p class="lead">Valores de referencia en UF. Los trabajos pequeños se cobran en pesos.</p>
+      </div>
 
-          <div class="note-card reveal d1 mt-md">
-            <p>Diseño e implementación se cotizan por separado.</p>
-          </div>
-
-          <div class="hero-actions reveal d2 mt-sm">
-            <a class="btn btn-primary btn-lg" href="#contacto" data-abre-solicitud>Pedir el diagnóstico <span class="arrow" aria-hidden="true">-&gt;</span></a>
-          </div>
+      <div class="precio-inicial reveal">
+        <div class="precio-inicial-texto">
+          <span class="eyebrow">Para comenzar</span>
+          <h3>Auditoría inicial</h3>
+          <p class="precio-inicial-valor">Gratis</p>
+          <p>Primera lectura de tu caso, por escrito y sin obligación de continuar. La tienes en pocos días.</p>
+          <a class="btn btn-primary btn-lg" href="#contacto" data-abre-solicitud>Pedir la auditoría inicial <span class="arrow" aria-hidden="true">-&gt;</span></a>
         </div>
+        <ol class="checklist">
+          <li><span class="num">1</span><div><b>Resumen del problema</b></div></li>
+          <li><span class="num">2</span><div><b>Procesos candidatos a automatizar</b></div></li>
+          <li><span class="num">3</span><div><b>Riesgos legales a revisar</b></div></li>
+          <li><span class="num">4</span><div><b>Información pendiente</b></div></li>
+          <li><span class="num">5</span><div><b>Prioridad y siguientes pasos</b></div></li>
+        </ol>
+      </div>
 
-        <div class="reveal d1">
-          <ol class="checklist">
-            <li>
-              <span class="num">1</span>
-              <div>
-                <b>Resumen del problema</b>
-              </div>
-            </li>
-            <li>
-              <span class="num">2</span>
-              <div>
-                <b>Procesos candidatos a automatizar</b>
-              </div>
-            </li>
-            <li>
-              <span class="num">3</span>
-              <div>
-                <b>Datos pendientes</b>
-              </div>
-            </li>
-            <li>
-              <span class="num">4</span>
-              <div>
-                <b>Prioridad inicial</b>
-              </div>
-            </li>
-            <li>
-              <span class="num">5</span>
-              <div>
-                <b>Siguientes pasos</b>
-              </div>
-            </li>
-          </ol>
+      <!-- precios -->
+
+      <div class="inline-facts">
+        <div class="fact">
+          <span class="eyebrow">Cómo se cobra</span>
+          <b>UF al valor del día de emisión</b>
+          <p>Los montos en UF se pagan en pesos según la UF del día en que se emite el documento de cobro. Todos los valores son netos: el impuesto se agrega según el documento tributario que corresponda.</p>
+        </div>
+        <div class="fact">
+          <span class="eyebrow">Qué mueve el precio y el plazo</span>
+          <b>El valor final va en la propuesta</b>
+          <p>Cuántos sistemas y personas participan, los accesos que haya que gestionar y la calidad de la información disponible. El precio se fija por escrito antes de empezar y sólo cambia si cambia el alcance.</p>
         </div>
       </div>
     </div>
@@ -546,60 +514,14 @@
 
       <div class="reveal">
         <div class="tablist" role="tablist" aria-label="Condiciones del servicio">
-          <button class="tab" id="tab-1" role="tab" aria-selected="true" aria-controls="tp-1" type="button">Tiempos</button>
-          <button class="tab" id="tab-2" role="tab" aria-selected="false" aria-controls="tp-2" type="button" tabindex="-1">Para comenzar</button>
-          <button class="tab" id="tab-3" role="tab" aria-selected="false" aria-controls="tp-3" type="button" tabindex="-1">Responsabilidades</button>
-          <button class="tab" id="tab-4" role="tab" aria-selected="false" aria-controls="tp-4" type="button" tabindex="-1">Tu participación</button>
-          <button class="tab" id="tab-5" role="tab" aria-selected="false" aria-controls="tp-5" type="button" tabindex="-1">Reuniones y cobertura</button>
-        </div>
-
-        <!-- Tiempos -->
-        <div class="tabpanel" id="tp-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-          <div class="panel-head">
-            <h3>Cuánto demora aproximadamente un proyecto</h3>
-          </div>
-
-          <div class="rows">
-            <div class="row">
-              <span class="row-title">Diagnóstico inicial</span>
-              <span class="row-desc">Desde que nos cuentas el problema hasta que recibes la lectura ordenada.</span>
-              <span class="row-meta">Pocos días</span>
-            </div>
-            <div class="row">
-              <span class="row-title">Automatización acotada</span>
-              <span class="row-desc">Una tarea repetitiva concreta, con pocos sistemas involucrados.</span>
-              <span class="row-meta">1 a 2 semanas</span>
-            </div>
-            <div class="row">
-              <span class="row-title">Sitio o portal corporativo</span>
-              <span class="row-desc">Desarrollo web a la medida, con contenido definido y sin integraciones complejas.</span>
-              <span class="row-meta">2 a 4 semanas</span>
-            </div>
-            <div class="row">
-              <span class="row-title">Proceso completo</span>
-              <span class="row-desc">Un flujo de punta a punta con varias etapas, validaciones y usuarios.</span>
-              <span class="row-meta">3 a 4 semanas</span>
-            </div>
-            <div class="row">
-              <span class="row-title">Sistema a la medida, integración o agente con IA</span>
-              <span class="row-desc">Software propio, conexión entre sistemas o asistente con pruebas y ajustes sobre casos reales.</span>
-              <span class="row-meta">3 a 4 semanas</span>
-            </div>
-            <div class="row">
-              <span class="row-title">Acompañamiento</span>
-              <span class="row-desc">Revisión, incidencias dentro del alcance y ajustes menores después de la entrega.</span>
-              <span class="row-meta">Continuo</span>
-            </div>
-          </div>
-
-          <div class="note-card mt-sm">
-            <span class="eyebrow">Qué mueve el plazo</span>
-            <p>Los accesos que haya que gestionar, cuántas personas tienen que validar, la calidad de la información disponible y los cambios de alcance durante el proyecto.</p>
-          </div>
+          <button class="tab" id="tab-1" role="tab" aria-selected="true" aria-controls="tp-1" type="button">Para comenzar</button>
+          <button class="tab" id="tab-2" role="tab" aria-selected="false" aria-controls="tp-2" type="button" tabindex="-1">Responsabilidades</button>
+          <button class="tab" id="tab-3" role="tab" aria-selected="false" aria-controls="tp-3" type="button" tabindex="-1">Tu participación</button>
+          <button class="tab" id="tab-4" role="tab" aria-selected="false" aria-controls="tp-4" type="button" tabindex="-1">Reuniones y cobertura</button>
         </div>
 
         <!-- Para comenzar -->
-        <div class="tabpanel" id="tp-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0" hidden>
+        <div class="tabpanel" id="tp-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
           <div class="panel-head">
             <h3>Qué necesito para comenzar</h3>
           </div>
@@ -637,14 +559,14 @@
               <span class="num">5</span>
               <div>
                 <b>Accesos, solo cuando llegue la implementación</b>
-                <p>Los permisos necesarios se gestionan al momento de construir, por los canales de tu empresa. Nunca por formulario ni por correo.</p>
+                <p>Los permisos se piden recién al construir, no durante la auditoría.</p>
               </div>
             </li>
           </ol>
         </div>
 
         <!-- Responsabilidades -->
-        <div class="tabpanel" id="tp-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0" hidden>
+        <div class="tabpanel" id="tp-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0" hidden>
           <div class="panel-head">
             <h3>Coberturas y responsabilidades de ambas partes</h3>
           </div>
@@ -657,7 +579,6 @@
               </div>
               <ul>
                 <li>Levantar y documentar el proceso tal como ocurre hoy.</li>
-                <li>Analizar y recomendar con criterio, incluso cuando la recomendación es no hacerlo.</li>
                 <li>Diseñar e implementar la solución acordada dentro del alcance.</li>
                 <li>Entregar documentación de lo construido y de cómo se opera.</li>
                 <li>Avisar a tiempo si un plazo o un alcance está en riesgo.</li>
@@ -691,14 +612,14 @@
             </div>
             <div class="fact">
               <span class="eyebrow">Cambios de alcance</span>
-              <b>Se conversan, no se asumen</b>
-              <p>Si algo nuevo aparece a mitad de camino, se evalúa su impacto en plazo y alcance antes de incorporarlo. Nada entra en silencio.</p>
+              <b>Se pueden pedir, y se conversan</b>
+              <p>Los ajustes dentro de lo acordado entran en la siguiente entrega. Si algo nuevo cambia el alcance, te decimos qué implica en plazo y precio antes de tomarlo. Nada entra en silencio.</p>
             </div>
           </div>
         </div>
 
         <!-- Tu participación -->
-        <div class="tabpanel" id="tp-4" role="tabpanel" aria-labelledby="tab-4" tabindex="0" hidden>
+        <div class="tabpanel" id="tp-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0" hidden>
           <div class="panel-head">
             <h3>Qué tan involucrado puedes estar</h3>
           </div>
@@ -728,11 +649,6 @@
 
           <div class="inline-facts">
             <div class="fact">
-              <span class="eyebrow">Cambios durante el proceso</span>
-              <b>Sí, se pueden pedir</b>
-              <p>Los ajustes dentro de lo acordado son parte del trabajo y se incorporan en la siguiente entrega. Si un cambio modifica el alcance, te decimos qué implica en plazo antes de tomarlo. Preferimos eso a descubrir al final que se construyó lo que no era.</p>
-            </div>
-            <div class="fact">
               <span class="eyebrow">Diseño y desarrollo</span>
               <b>Van incluidos, y van juntos</b>
               <p>El diseño de la solución (cómo debería funcionar el proceso, qué ve cada persona, qué pasa en cada caso) y su construcción son parte del mismo trabajo. No entregamos un plano para que otro lo implemente, salvo que tú lo prefieras así.</p>
@@ -741,7 +657,7 @@
         </div>
 
         <!-- Reuniones y cobertura -->
-        <div class="tabpanel" id="tp-5" role="tabpanel" aria-labelledby="tab-5" tabindex="0" hidden>
+        <div class="tabpanel" id="tp-4" role="tabpanel" aria-labelledby="tab-4" tabindex="0" hidden>
           <div class="panel-head">
             <h3>Horario, formato de reunión y cobertura</h3>
           </div>
@@ -790,36 +706,11 @@
           </div>
 
           <div class="note-card mt-sm">
-            <span class="eyebrow">Atención continua</span>
-            <p>No hay horario que respetar: el canal está abierto de día, de noche, en fin de semana y en festivos. Los tiempos de respuesta comprometidos para un proyecto en marcha se acuerdan por escrito antes de empezar.</p>
+            <span class="eyebrow">Tiempos de respuesta</span>
+            <p>Para un proyecto en marcha, los tiempos de respuesta comprometidos se acuerdan por escrito antes de empezar.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- == MANTENIMIENTO == -->
-  <section id="mantenimiento" class="section">
-    <div class="container">
-      <div class="section-head center reveal">
-        <h2 class="h-section">Mantenimiento y soporte.</h2>
-      </div>
-
-      <div class="grid g3">
-        <article class="card card-lift mini reveal">
-          <h4>Revisión de funcionamiento</h4>
-          <p>Comprobamos periódicamente que los flujos sigan corriendo y que los datos lleguen donde deben. Si algo se cae, no esperamos a que lo notes tú.</p>
-        </article>
-        <article class="card card-lift mini reveal d1">
-          <h4>Incidencias dentro del alcance</h4>
-          <p>Cuando algo falla en lo que construimos, lo tomamos nosotros. Los tiempos de respuesta se acuerdan por escrito según el plan.</p>
-        </article>
-        <article class="card card-lift mini reveal d2">
-          <h4>Ajustes menores</h4>
-          <p>Cambió un formato, se sumó un campo, se movió una etapa del proceso. Los ajustes pequeños entran sin abrir un proyecto nuevo.</p>
-        </article>
-      </div>
-
     </div>
   </section>
 
@@ -893,8 +784,8 @@
               <div class="opciones" data-grupo="servicios" data-multiple="true" role="group" aria-label="Tipo de servicio">
                 <h4 class="service-group-title">Para comenzar</h4>
                 <button class="opcion" type="button" aria-pressed="false" data-valor="Diagnóstico inicial">
-                  <b>Diagnóstico inicial</b>
-                  <span>Miramos tu operación y te decimos qué conviene hacer primero. Sin costo y sin obligación de continuar.</span>
+                  <b>Auditoría inicial gratuita</b>
+                  <span>Miramos tu operación y te decimos qué conviene hacer primero, sin obligación de continuar.</span>
                 </button>
                 <h4 id="opcionesDigitales" class="service-group-title service-group-title--digital">Apoyo digital y técnico</h4>
                 <button class="opcion" type="button" aria-pressed="false" data-valor="Apoyo digital y tecnológico">
@@ -1030,7 +921,7 @@
                   <li>Hablamos de tu proceso actual: quién hace qué, con qué herramientas y dónde se pierde el tiempo.</li>
                   <li>No es una reunión de venta. Si algo no conviene automatizar, te lo decimos ahí mismo.</li>
                   <li>No pedimos contraseñas, accesos ni datos de tus clientes. Si el proyecto avanza, esos accesos se gestionan por los canales de tu empresa.</li>
-                  <li>Después recibes el diagnóstico inicial por escrito, sin costo y sin obligación de seguir.</li>
+                  <li>Después recibes por escrito el resultado de la auditoría inicial.</li>
                 </ul>
               </aside>
             </section>
@@ -1123,14 +1014,14 @@
 
               <label class="consent">
                 <input type="checkbox" id="f-consent" name="consentimiento" required />
-                <span>He leído y acepto los <a href="terminos.html" data-sale-del-formulario>términos y condiciones del sitio</a> y su <a href="terminos.html#t11" data-sale-del-formulario>política de datos personales</a>, y autorizo el contacto por los medios indicados para responder esta consulta.</span>
+                <span>He leído y acepto los <a href="/terminos" data-sale-del-formulario>términos y condiciones del sitio</a> y su <a href="/terminos#t11" data-sale-del-formulario>política de datos personales</a>, y autorizo el contacto por los medios indicados para responder esta consulta.</span>
               </label>
             </section>
 
             <div class="form-done" id="formListo" hidden>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 5-5"/></svg>
               <b>¡Solicitud enviada!</b>
-              <p>Gracias por escribirnos. Te contactamos a la brevedad para agendar tu diagnóstico.</p>
+              <p>Gracias por escribirnos. Te contactamos a la brevedad para agendar tu auditoría inicial.</p>
               <button class="btn btn-secondary btn-md" type="button" id="btnOtra">Enviar otra solicitud</button>
             </div>
           </form>
@@ -1172,40 +1063,29 @@
 
       <div class="faq reveal">
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿El diagnóstico inicial tiene costo?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>No. El diagnóstico inicial es gratuito. Diseño e implementación se cotizan por separado.</p></div></div>
+          <button class="faq-q" type="button" aria-expanded="false">¿Qué diferencia hay entre la auditoría inicial y una auditoría completa?<span class="faq-sign" aria-hidden="true"></span></button>
+          <div class="faq-a"><div><p>La inicial es una primera lectura de tu caso: qué conviene revisar, en qué orden y qué puede esperar. La completa revisa en detalle cada flujo, sistema o documento involucrado y termina en un informe con riesgos, brechas y mejoras priorizadas.</p></div></div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿Incluye diseño y desarrollo?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>Sí. Definimos cómo funciona la solución y la construimos. También podemos entregar solo el diseño si tu equipo la implementa.</p></div></div>
+          <button class="faq-q" type="button" aria-expanded="false">¿Mi empresa tiene que adecuarse a la Ley 21.719?<span class="faq-sign" aria-hidden="true"></span></button>
+          <div class="faq-a"><div><p>Si tratas datos personales de clientes, trabajadores o proveedores, la ley te aplica, sin importar el tamaño de la empresa. Lo primero es saber qué datos tienes, para qué los usas y quién accede a ellos, y eso se puede ver en la auditoría inicial.</p></div></div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿Puedo solicitar cambios durante el proceso?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>Sí. Los ajustes dentro del alcance se incorporan en la siguiente entrega. Si cambian el alcance, acordamos el plazo antes de implementarlos.</p></div></div>
+          <button class="faq-q" type="button" aria-expanded="false">¿Puedo contratar sólo la parte legal o sólo la técnica?<span class="faq-sign" aria-hidden="true"></span></button>
+          <div class="faq-a"><div><p>Sí, cada servicio se contrata por separado. Conviene hacerlas juntas cuando el mismo sistema tiene que funcionar bien y además cumplir la ley: se revisa una sola vez y las recomendaciones no se contradicen.</p></div></div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿Cuánto demora aproximadamente un proyecto?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>Una automatización acotada suele tomar 1 a 2 semanas; un proceso completo, 3 a 4. El plazo se fija en la propuesta según el alcance.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿Trabajan presencial o remoto?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>En la Región Metropolitana, remoto y presencial según el proyecto. En otras regiones y países, remoto.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" type="button" aria-expanded="false">¿Cuál es el horario de atención?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>El canal está abierto 24/7. Los tiempos de respuesta de cada proyecto se acuerdan por escrito.</p></div></div>
+          <button class="faq-q" type="button" aria-expanded="false">¿Quién es dueño de lo que desarrollan?<span class="faq-sign" aria-hidden="true"></span></button>
+          <div class="faq-a"><div><p>La propiedad intelectual de cada proyecto se acuerda por escrito en la propuesta, antes de empezar, junto con el alcance, el precio y los plazos.</p></div></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">¿Qué pasa con la información que comparto?<span class="faq-sign" aria-hidden="true"></span></button>
-          <div class="faq-a"><div><p>La usamos para responder tu consulta y preparar el diagnóstico. Los accesos técnicos se gestionan por los canales de tu empresa.</p></div></div>
+          <div class="faq-a"><div><p>La usamos sólo para responder tu consulta y preparar la auditoría inicial. El detalle está en la <a href="/terminos#t11">política de datos personales</a>.</p></div></div>
         </div>
-
       </div>
     </div>
   </section>
@@ -1215,16 +1095,17 @@
 <footer>
   <div class="container footer-top">
     <a class="brand" href="#inicio">
-      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="2172" height="724" />
+      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="720" height="240" />
     </a>
 
     <nav class="footer-nav" aria-label="Enlaces del pie">
+      <a href="#servicios">Auditorías</a>
       <a href="#soluciones">Digital y técnico</a>
       <a href="#apoyo-legal">Apoyo legal</a>
-      <a href="#metodologia">Metodología</a>
+      <a href="#precios">Precios</a>
       <a href="#preguntas">Preguntas</a>
-      <a href="terminos.html">Términos</a>
-      <a href="terminos.html#t11">Privacidad</a>
+      <a href="/terminos">Términos</a>
+      <a href="/terminos#t11">Privacidad</a>
       <a data-wa href="#contacto">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-4.1A8.6 8.6 0 1 1 8.1 20.3L3 21Z"/><path d="M8.9 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.6.5l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.2-.2.3 0 .5a6 6 0 0 0 2.4 2.1c.2.1.3.1.5-.1l.5-.6c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.2.3.4 0 .5-.3 1.1-.7 1.3-.4.2-1 .3-1.5.2a9.4 9.4 0 0 1-6-6c-.1-.6 0-1.2.3-1.7Z"/></svg>
         WhatsApp <span data-wa-numero></span>
@@ -1234,7 +1115,7 @@
 
   <div class="footer-bottom">
     <div class="container">
-      <p><span id="anio">2026</span> KRATEROI</p>
+      <p><span id="anio">2026</span> KRATEROI · Auditoría legal y digital, software e IA para empresas. Región Metropolitana, Chile.</p>
     </div>
   </div>
 </footer>

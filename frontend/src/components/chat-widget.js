@@ -51,7 +51,7 @@ const MARCADO = `
 <section class="chat-panel" id="chatPanel" role="dialog" aria-label="Asistente de Krateroi" hidden>
   <header class="chat-head">
     <div class="chat-quien">
-      <span class="chat-avatar" aria-hidden="true"><img src="/assets/images/krateroi-icon.png" alt="" width="1254" height="1254" /></span>
+      <span class="chat-avatar" aria-hidden="true"><img src="/assets/images/krateroi-icon.png" alt="" width="192" height="192" /></span>
       <span class="chat-quien-txt">
         <b>Asistente Krateroi</b>
         <span>Diagnóstico inicial para PYMES</span>
@@ -75,7 +75,7 @@ const MARCADO = `
         <svg class="chat-i-espera" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true" hidden><path d="M12 3a9 9 0 1 0 9 9"/></svg>
       </button>
     </div>
-    <p class="chat-nota">Demo de diagnóstico: las soluciones las evalúa el equipo. No se guardan las conversaciones ni se piden datos sensibles. <a href="terminos.html#t7">Cómo funciona el asistente</a>.</p>
+    <p class="chat-nota">Demo de diagnóstico: las soluciones las evalúa el equipo. No se guardan las conversaciones ni se piden datos sensibles. <a href="/terminos#t7">Cómo funciona el asistente</a>.</p>
   </form>
 </section>
 <button class="chat-fab" id="chatFab" type="button" aria-expanded="false" aria-controls="chatPanel" aria-label="Abrir asistente Krateroi">
