@@ -281,6 +281,20 @@ Tools puede importar la propiedad desde Search Console. Tras cada despliegue con
 cambios de contenido, `npm run indexnow` (en `frontend/`) avisa a Bing y a los
 buscadores que usan IndexNow.
 
+## Despliegue en Vercel
+
+El proyecto `paginaprincipal-krateroii` no tiene repositorio conectado: la
+cuenta de Vercel inicia sesión en GitHub como KRATEROI y sólo ve esos
+repositorios, no los de krateroi7-boop. Por eso un push a `main` no publica
+nada; se despliega desde la raíz con la CLI:
+
+    npx vercel@50 deploy --prod
+
+En un equipo nuevo, antes: `npx vercel@50 login` y
+`npx vercel@50 link --project paginaprincipal-krateroii` (crea `.vercel/`, que
+git ignora). Las variables de entorno (`VITE_API_BASE_URL` y, cuando exista,
+`GOOGLE_SITE_VERIFICATION`) se leen del proyecto en Vercel, no de la carpeta.
+
 ## Despliegue en VPS con Docker
 
 Todo el sitio se levanta con un comando. `docker-compose.prod.yml` construye

@@ -19,3 +19,6 @@ frontend/.env*
 
 # Preferencias del editor: son de cada equipo, no del proyecto
 .vscode/
+
+# Enlace local con el proyecto de Vercel: lo crea `vercel link`
+.vercel
