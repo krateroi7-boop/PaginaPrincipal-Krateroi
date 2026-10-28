@@ -102,11 +102,39 @@ async function pedir(ruta, cuerpo, { timeout, intentos = 1, porDefecto }) {
 
 /** Solicitud del formulario por etapas. El backend valida los datos
     y entrega el informe PDF por Telegram. */
-export function enviarConsulta(datos) {
-  return pedir('/api/consulta', datos, {
+const SERVICIOS_LEGALES = new Map([
+  ['Protección de datos personales', 'Protección de datos'],
+  ['Ciberseguridad legal', 'Ciberseguridad legal'],
+  ['Auditoría legal digital', 'Auditoría legal digital'],
+  ['Contratos tecnológicos e IA', 'Contratos tecnológicos e IA'],
+]);
+
+export async function enviarConsulta(datos) {
+  const opciones = {
     timeout: TIMEOUT_CONSULTA,
     porDefecto: 'No se pudo enviar la solicitud. Intenta de nuevo.',
-  });
+  };
+  try {
+    return await pedir('/api/consulta', datos, opciones);
+  } catch (err) {
+    // El backend anterior aun no tiene las cuatro opciones legales en
+    // su catalogo. Un 400 de validacion no registra la solicitud, asi
+    // que se puede reintentar con esas opciones como texto libre.
+    const legales = datos.servicios.filter((s) => SERVICIOS_LEGALES.has(s));
+    if (err.status !== 400 || !legales.length || !/servicios/i.test(err.message)) throw err;
+    const servicioOtro = [
+      ...legales.map((s) => SERVICIOS_LEGALES.get(s)),
+      datos.servicioOtro,
+    ].filter(Boolean).join(', ');
+    if (servicioOtro.length > 120) {
+      throw fallo('La lista de servicios es demasiado larga para enviarla. Acorta el campo "Otra cosa".', 400);
+    }
+    return pedir('/api/consulta', {
+      ...datos,
+      servicios: datos.servicios.filter((s) => !SERVICIOS_LEGALES.has(s)),
+      servicioOtro,
+    }, opciones);
+  }
 }
 
 /** Turno del asistente. Devuelve el texto ya listo para mostrar. */

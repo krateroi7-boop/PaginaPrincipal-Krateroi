@@ -765,10 +765,10 @@ export function iniciarSolicitud() {
            evita que el navegador siga insistiendo. */
         limites.anotar('contacto');
         estado.textContent = err.message;
-      } else if (!err.status) {
-        /* Sin red: el resumen queda a la vista para que la persona
-           pueda copiarlo y enviarlo por otro medio. */
-        estado.textContent = `${err.message} El resumen quedó abajo para que puedas copiarlo.`;
+      } else if (!err.status || err.status >= 500) {
+        /* Si la API o Telegram fallan, la solicitud no se marca como
+           enviada. Quedan el resumen y el PDF para una via alternativa. */
+        estado.textContent = `${err.message} Puedes copiar el resumen o descargar el informe PDF y enviarlo por otra vía.`;
         resumen.textContent = armarResumen();
         resumen.hidden = false;
       } else {
