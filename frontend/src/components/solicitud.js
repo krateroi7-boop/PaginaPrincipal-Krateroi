@@ -23,6 +23,7 @@ import { limites } from '../state/store.js';
 import { borrador } from '../state/borrador.js';
 import { enviarConsulta } from '../services/api.js';
 import { enlaceWhatsapp } from './contacto.js';
+import { crearInformePDF, descargarInforme } from '../lib/informe-pdf.js';
 
 /* Cupo del formulario. Una solicitud de diagnóstico se manda una
    vez; varias seguidas desde el mismo equipo son un error o un
@@ -77,6 +78,8 @@ export function iniciarSolicitud() {
   const btnWhatsapp = $('#btnWhatsapp');
   const btnCopiar = $('#btnCopiar');
   const btnOtra = $('#btnOtra');
+  const btnInforme = $('#btnInforme');
+  const btnInformeListo = $('#btnInformeListo');
 
   const cajaReanudar = $('#reanudarSolicitud');
   const detalleReanudar = $('#reanudarDetalle');
@@ -93,6 +96,7 @@ export function iniciarSolicitud() {
   let enviado = false;
   let restaurando = false;
   let tempGuardado = 0;
+  let ultimoInforme = null;
 
   /* -- LECTURA DE RESPUESTAS ------------------------------- */
 
@@ -742,8 +746,15 @@ export function iniciarSolicitud() {
     estado.textContent = 'Enviando tu solicitud...';
 
     try {
-      await enviarConsulta(datosSolicitud());
+      const datos = datosSolicitud();
+      await enviarConsulta(datos);
       limites.anotar('contacto');
+      try {
+        ultimoInforme = await crearInformePDF(datos);
+        descargarInforme(ultimoInforme);
+      } catch (errorInforme) {
+        console.error('No se pudo crear el informe PDF:', errorInforme);
+      }
       mostrarListo();
     } catch (err) {
       console.error('Error al enviar la solicitud:', err);
@@ -785,6 +796,10 @@ export function iniciarSolicitud() {
     $('.solicitud-botones').hidden = true;
     estado.textContent = '';
     listo.hidden = false;
+    const avisoInforme = $('#avisoInforme');
+    if (avisoInforme) avisoInforme.textContent = ultimoInforme
+      ? 'Tu informe se descargó en PDF.'
+      : 'La solicitud se envió, pero el PDF no se pudo generar. Puedes intentar descargarlo aquí.';
     listo.setAttribute('tabindex', '-1');
     listo.focus();
   }
@@ -861,12 +876,32 @@ export function iniciarSolicitud() {
       $('.solicitud-botones').hidden = false;
 
       enviado = false;
+      ultimoInforme = null;
       descartarBorrador();
 
       window.addEventListener('beforeunload', avisarAlSalir);
       irA(1);
     });
   }
+
+  async function bajarInforme() {
+    const revision = validarTodo();
+    if (!revision.ok && !enviado) {
+      if (revision.paso !== pasoActual) irA(revision.paso);
+      avisar(revision.motivo);
+      return;
+    }
+    try {
+      ultimoInforme ||= await crearInformePDF(datosSolicitud());
+      descargarInforme(ultimoInforme);
+    } catch (error) {
+      console.error('No se pudo descargar el informe:', error);
+      estado.className = 'form-status err';
+      estado.textContent = 'No se pudo crear el PDF. Intenta de nuevo.';
+    }
+  }
+  btnInforme?.addEventListener('click', bajarInforme);
+  btnInformeListo?.addEventListener('click', bajarInforme);
 
   /* -- ARRANQUE ----------------------------------------------
      Si quedó un borrador vigente, el formulario nace con lo que había

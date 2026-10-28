@@ -19,6 +19,7 @@ import { $, ocultarSvg, enviarFormulario } from './ui-helpers.js';
 import { revisar, protegerCampo } from '../lib/texto.js';
 import { limites, historial } from '../state/store.js';
 import { enviarMensajeChat } from '../services/api.js';
+import { responderGuiado } from '../lib/chat-guiado.js';
 import '../styles/chat.css';
 
 const MAX_CARACTERES = 1200;
@@ -37,7 +38,7 @@ const CUPO = {
 };
 
 const SALUDO =
-  'Hola. Soy el asistente de Krateroi. Cuéntame qué proceso de tu empresa te gustaría mejorar o qué tarea te está quitando tiempo.';
+  'Hola. Soy el asistente de Krateroi. Cuéntame qué necesitas resolver en el área digital, técnica o legal.';
 
 /* Casos habituales: son los que mejor muestran que el agente
    diagnostica antes de proponer una solución. */
@@ -45,6 +46,7 @@ const EJEMPLOS = [
   'Perdemos reservas porque llegan por WhatsApp y a veces nadie responde.',
   'Llevamos el inventario en Excel y cada venta la descontamos a mano.',
   'Copiamos la misma información de un sistema a otro todos los días.',
+  'Necesitamos revisar el tratamiento de datos personales de nuestra empresa.',
 ];
 
 const MARCADO = `
@@ -54,7 +56,7 @@ const MARCADO = `
       <span class="chat-avatar" aria-hidden="true"><img src="/assets/images/krateroi-icon.png" alt="" width="192" height="192" /></span>
       <span class="chat-quien-txt">
         <b>Asistente Krateroi</b>
-        <span>Diagnóstico inicial para PYMES</span>
+        <span>Apoyo digital, técnico y legal</span>
       </span>
     </div>
     <div class="chat-acciones">
@@ -266,8 +268,6 @@ export function iniciarChat() {
       mostrarError(cupo.motivo);
       return;
     }
-    limites.anotar('chat');
-
     quitarError();
     quitarEjemplos();
     historial.agregar('user', texto);
@@ -278,12 +278,20 @@ export function iniciarChat() {
     try {
       const respuesta = await enviarMensajeChat(historial.recientes());
       ocupado(false);
+      limites.anotar('chat');
       historial.agregar('assistant', respuesta);
       pintar('assistant', respuesta);
     } catch (err) {
       console.error('Error en el asistente:', err);
       ocupado(false);
-      mostrarError(err.message || 'No fue posible conectar con el asistente.');
+      if (err.status === 400 || err.status === 422) {
+        mostrarError(err.message || 'No se pudo procesar el mensaje.');
+        return;
+      }
+      const respuesta = responderGuiado(texto);
+      limites.anotar('chat');
+      historial.agregar('assistant', respuesta);
+      pintar('assistant', respuesta);
     }
   });
 

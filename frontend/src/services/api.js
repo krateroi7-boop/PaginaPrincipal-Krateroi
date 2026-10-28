@@ -22,7 +22,9 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
    que ser el mayor de los tres, o el navegador abandonaría una respuesta
    que venía en camino y el visitante vería un error donde no lo hubo.
    Con 45 s pasaba justamente eso en cuanto el backend reintentaba. */
-const TIMEOUT_CONSULTA = 10000;
+// Render puede tardar en despertar; 10 s cortaba una solicitud valida
+// antes de que Telegram recibiera el aviso.
+const TIMEOUT_CONSULTA = 60000;
 const TIMEOUT_CHAT = 90000;
 
 /* El chat no reintenta desde el navegador: quien reintenta los 500 del
@@ -98,8 +100,8 @@ async function pedir(ruta, cuerpo, { timeout, intentos = 1, porDefecto }) {
   throw ultimo;
 }
 
-/** Solicitud del formulario por etapas. El backend valida, arma el
-    resumen y lo publica en Telegram. */
+/** Solicitud del formulario por etapas. El backend valida los datos
+    y entrega el informe PDF por Telegram. */
 export function enviarConsulta(datos) {
   return pedir('/api/consulta', datos, {
     timeout: TIMEOUT_CONSULTA,

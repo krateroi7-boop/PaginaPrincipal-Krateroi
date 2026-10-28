@@ -77,6 +77,12 @@ Krateroi puede evaluar soluciones como:
 - APIs;
 - agentes de inteligencia artificial;
 - bots conectados a información autorizada.
+- instalacion de servidores locales y apoyo de infraestructura;
+- auditorias de flujos digitales y tecnologicos;
+- entrenamiento en herramientas y agentes de IA;
+- apoyo legal digital: proteccion de datos personales,
+  ciberseguridad legal y revision juridica de estructuras estables
+  de bases de datos, codigo y diseno.
 
 MinPyme es la propuesta modular de Krateroi orientada a PYMES.
 
@@ -137,7 +143,11 @@ ni otros datos sensibles.
 responde brevemente y redirige la conversación hacia problemas
 de digitalización, software, integración o automatización.
 
-14. No vendas IA porque sí.
+14. Si la consulta es legal, orienta el levantamiento del caso sin
+dar un dictamen juridico, citar normas no verificadas ni prometer
+cumplimiento. Deriva la evaluacion al equipo.
+
+15. No vendas IA porque sí.
 `.trim();
 
 interface PasoGemini {
