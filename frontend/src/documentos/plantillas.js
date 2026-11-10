@@ -5,9 +5,10 @@
    y ningún valor real. {empresa}, {responsable} y {fecha} se
    reemplazan con lo que la persona escribe en el formulario.
 
-   Cada documento se arma por páginas; cada página es una lista de
-   bloques que dibuja render.js (texto, tabla, rejilla, lista, kpis,
-   tarjeta y firmas).
+   Los bloques (texto, tabla, rejilla, lista, kpis, tarjeta y firmas)
+   los dibuja maquetar.js con la plantilla del informe del formulario.
+   Están agrupados por página como referencia; el maquetador los
+   reparte solo y lleva a la página siguiente lo que no cabe.
    ------------------------------------------------------------- */
 
 export const CATEGORIAS = [
@@ -28,8 +29,8 @@ export const CATEGORIAS = [
               t: 'tabla', n: '02', titulo: 'Objetivos estratégicos',
               cols: [{ h: 'Objetivo', w: '28%' }, { h: 'Indicador' }, { h: 'Meta', w: '16%', der: true }],
               filas: [
-                ['Eficiencia operativa', 'Tiempo promedio de los procesos clave', '−20 %'],
-                ['Experiencia de clientes', 'Satisfacción medida al cierre de cada servicio', '≥ 90 %'],
+                ['Eficiencia operativa', 'Tiempo promedio de los procesos clave', '-20 %'],
+                ['Experiencia de clientes', 'Satisfacción medida al cierre de cada servicio', '90 %'],
                 ['Gestión de la información', 'Procesos con datos centralizados y actualizados', '100 %'],
                 ['Cumplimiento', 'Políticas internas revisadas y vigentes', '4 / 4'],
                 ['Desarrollo del equipo', 'Horas de formación por persona al año', '24 h'],
@@ -215,7 +216,7 @@ export const CATEGORIAS = [
               filas: [
                 ['Cumplimiento de plazos', '95 %', '96 %', 'En meta'],
                 ['Tiempo medio de respuesta', '5 h', '4,2 h', 'En meta'],
-                ['Reaperturas', '≤ 3 %', '4 %', 'Atención'],
+                ['Reaperturas', 'Máx. 3 %', '4 %', 'Atención'],
                 ['Satisfacción interna', '90 %', '91 %', 'En meta'],
                 ['Disponibilidad de sistemas', '99 %', '99,4 %', 'En meta'],
               ],
@@ -568,7 +569,7 @@ export const CATEGORIAS = [
         paginas: [
           [
             { t: 'texto', n: '01', titulo: 'Situación actual', cuerpo: 'Hoy, parte importante del tiempo del equipo de {empresa} se destina a tareas manuales de registro y consolidación de información. Este caso de negocio evalúa la conveniencia de automatizar esas tareas.' },
-            { t: 'kpis', n: '02', titulo: 'Beneficios estimados', items: [['−30 %', 'Tiempo en tareas manuales'], ['+25 %', 'Capacidad de atención'], ['6', 'Meses de retorno'], ['0', 'Planillas duplicadas']] },
+            { t: 'kpis', n: '02', titulo: 'Beneficios estimados', items: [['-30 %', 'Tiempo en tareas manuales'], ['+25 %', 'Capacidad de atención'], ['6', 'Meses de retorno'], ['0', 'Planillas duplicadas']] },
             {
               t: 'rejilla', n: '03', titulo: 'Criterios de evaluación',
               items: [

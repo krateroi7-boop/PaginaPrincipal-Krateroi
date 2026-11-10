@@ -413,8 +413,9 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 
 /* -- VITRINA DE DOCUMENTOS ------------------------------------ */
 
-/* Miniaturas dibujadas con CSS: la barra, la portada azul y bloques
-   que imitan tablas, tarjetas y listas del formato de informe. */
+/* Miniaturas dibujadas con CSS que imitan la plantilla del informe del
+   formulario: franja azul con KRATEROI y el título, secciones con
+   línea fina, tablas, tarjetas y listas. */
 .vitrina {
   display: flex;
   flex-wrap: wrap;
@@ -445,66 +446,70 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 }
 .vitrina-doc:hover .mini-hoja,
 .vitrina-doc:focus-visible .mini-hoja { transform: translateY(-4px); border-color: #93c5fd; }
-.mini-barra { display: flex; align-items: center; flex: none; height: 9%; padding-inline: 9%; background: #03194f; }
-.mini-barra img { width: auto; height: 34%; }
+/* Mismos colores que la plantilla del informe del formulario */
 .mini-portada {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: .3rem;
   flex: none;
-  padding: 9% 9% 10%;
-  background: #021b59;
+  min-height: 13.3%;
+  padding: 5% 8%;
+  background: #0e2036;
+  font-family: Helvetica, Arial, sans-serif;
   text-align: left;
-}
-.mini-portada i {
-  font-family: var(--mono);
-  font-size: .48rem;
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: .14em;
   text-transform: uppercase;
-  color: #60a5fa;
 }
-.mini-portada b { font-size: .82rem; font-weight: 700; line-height: 1.12; letter-spacing: -.02em; color: #fff; }
-.mini-cuerpo { display: flex; flex-direction: column; gap: 7%; flex: 1; padding: 9%; }
+.mini-portada i { font-size: .42rem; font-style: normal; font-weight: 700; color: #fff; }
+.mini-portada b { font-size: .62rem; font-weight: 700; line-height: 1.15; color: #fff; }
+.mini-cuerpo { display: flex; flex-direction: column; gap: 5.5%; flex: 1; padding: 9% 8%; }
 .mini-cuerpo > span { display: block; flex: none; }
-.mini-linea { height: 4px; border-radius: 2px; background: #d3dcea; }
+.mini-sec {
+  height: 7px;
+  margin-top: 2%;
+  border-bottom: 1px solid #dee6eb;
+  background: linear-gradient(#0e2036, #0e2036) 0 0 / 46% 4px no-repeat;
+}
+.mini-linea { height: 3px; border-radius: 2px; background: #dee6eb; }
 .mini-linea.corta { width: 62%; }
 .mini-tabla {
-  height: 22%;
-  border-top: 2px solid #021b59;
-  background: repeating-linear-gradient(#fff 0 7px, #d3dcea 7px 8px);
-}
-.mini-tarjeta { height: 24%; background: #0f2a66; }
-.mini-kpis {
-  height: 13%;
+  height: 18%;
+  border-top: 1.5px solid #0e2036;
   background:
-    linear-gradient(90deg, #021b59 0 22%, transparent 22% 26%, #021b59 26% 48%, transparent 48% 52%, #021b59 52% 74%, transparent 74% 78%, #021b59 78%) top / 100% 2px no-repeat,
-    linear-gradient(90deg, #c9d7ee 0 16%, transparent 16% 26%, #c9d7ee 26% 42%, transparent 42% 52%, #c9d7ee 52% 68%, transparent 68% 78%, #c9d7ee 78% 94%, transparent 94%) 0 60% / 100% 6px no-repeat;
+    linear-gradient(#387a9c, #387a9c) 0 4px / 22% 2px no-repeat,
+    repeating-linear-gradient(#fff 0 7px, #dee6eb 7px 8px);
+}
+.mini-tarjeta { height: 20%; background: #0e2036; }
+.mini-kpis {
+  height: 12%;
+  background:
+    linear-gradient(90deg, #0e2036 0 22%, transparent 22% 26%, #0e2036 26% 48%, transparent 48% 52%, #0e2036 52% 74%, transparent 74% 78%, #0e2036 78%) top / 100% 1.5px no-repeat,
+    linear-gradient(90deg, #0e2036 0 14%, transparent 14% 26%, #0e2036 26% 40%, transparent 40% 52%, #0e2036 52% 66%, transparent 66% 78%, #0e2036 78% 92%, transparent 92%) 0 45% / 100% 5px no-repeat,
+    linear-gradient(90deg, #387a9c 0 18%, transparent 18% 26%, #387a9c 26% 44%, transparent 44% 52%, #387a9c 52% 70%, transparent 70% 78%, #387a9c 78% 96%, transparent 96%) 0 85% / 100% 2px no-repeat;
 }
 .mini-lista {
-  height: 30%;
-  background: repeating-linear-gradient(#fff 0 9px, #d3dcea 9px 10px);
-  border-left: 6px solid #e6eefb;
+  height: 24%;
+  background: repeating-linear-gradient(#fff 0 9px, #dee6eb 9px 10px);
+  border-left: 6px solid #e6eef3;
 }
 .mini-rejilla {
-  height: 22%;
+  height: 18%;
   background:
-    linear-gradient(#d3dcea, #d3dcea) 0 0 / 46% 1px no-repeat,
-    linear-gradient(#d3dcea, #d3dcea) 100% 0 / 46% 1px no-repeat,
-    linear-gradient(#d3dcea, #d3dcea) 0 50% / 46% 1px no-repeat,
-    linear-gradient(#d3dcea, #d3dcea) 100% 50% / 46% 1px no-repeat,
-    linear-gradient(#e6eefb, #e6eefb) 0 22% / 30% 4px no-repeat,
-    linear-gradient(#e6eefb, #e6eefb) 54% 22% / 30% 4px no-repeat,
-    linear-gradient(#e6eefb, #e6eefb) 0 72% / 30% 4px no-repeat,
-    linear-gradient(#e6eefb, #e6eefb) 54% 72% / 30% 4px no-repeat;
+    linear-gradient(#dee6eb, #dee6eb) 0 0 / 46% 1px no-repeat,
+    linear-gradient(#dee6eb, #dee6eb) 100% 0 / 46% 1px no-repeat,
+    linear-gradient(#dee6eb, #dee6eb) 0 52% / 46% 1px no-repeat,
+    linear-gradient(#dee6eb, #dee6eb) 100% 52% / 46% 1px no-repeat,
+    linear-gradient(#0e2036, #0e2036) 0 22% / 26% 3px no-repeat,
+    linear-gradient(#0e2036, #0e2036) 54% 22% / 26% 3px no-repeat,
+    linear-gradient(#0e2036, #0e2036) 0 76% / 26% 3px no-repeat,
+    linear-gradient(#0e2036, #0e2036) 54% 76% / 26% 3px no-repeat;
 }
 .mini-firmas {
-  height: 10%;
+  height: 8%;
   margin-top: auto;
   background:
-    linear-gradient(#021b59, #021b59) 0 40% / 42% 1px no-repeat,
-    linear-gradient(#021b59, #021b59) 100% 40% / 42% 1px no-repeat;
+    linear-gradient(#0e2036, #0e2036) 0 40% / 42% 1px no-repeat,
+    linear-gradient(#0e2036, #0e2036) 100% 40% / 42% 1px no-repeat;
 }
 .vitrina-nombre { font-weight: 600; color: #fff; }
 .vitrina-detalle { font-size: .82rem; line-height: 1.45; color: #b8c6dc; }
@@ -513,7 +518,7 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 @media (max-width: 600px) {
   .vitrina { gap: 1.5rem 1rem; }
   .vitrina li { flex-basis: calc(50% - .5rem); }
-  .mini-portada b { font-size: .74rem; }
+  .mini-portada b { font-size: .56rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .vitrina-doc:hover .mini-hoja, .vitrina-doc:focus-visible .mini-hoja { transform: none; }

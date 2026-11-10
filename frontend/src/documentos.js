@@ -1,16 +1,16 @@
 /* -------------------------------------------------------------
    Generador de documentos de demostración (documentos.html).
 
-   La persona elige categoría y plantilla, completa los datos de
-   portada y ve las páginas A4 al instante. "Guardar como PDF" usa
-   la impresión del navegador: la hoja de estilos de impresión deja
-   solo las páginas, a tamaño A4 y sin márgenes.
+   Usa la misma plantilla que el informe PDF del formulario de
+   contacto (lib/informe-pdf.js). La vista previa se dibuja en SVG con
+   los mismos trazos que el PDF, así que lo que se ve es lo que se
+   descarga. Los contenidos son genéricos y solo muestran el formato.
    ------------------------------------------------------------- */
 
 import { CATEGORIAS } from './documentos/plantillas.js';
-import { componer } from './documentos/render.js';
+import { maquetar } from './documentos/maquetar.js';
+import { descargarInforme } from './lib/informe-pdf.js';
 
-const A4_PX = (210 * 96) / 25.4;
 const $ = (s, r = document) => r.querySelector(s);
 
 const hoyISO = () => {
@@ -41,7 +41,8 @@ function iniciar() {
   const hojas = $('[data-hojas]', raiz);
   const titulo = $('[data-titulo]', raiz);
   const btnZoom = $('[data-zoom]', raiz);
-  const btnImprimir = $('[data-imprimir]', raiz);
+  const btnDescargar = $('[data-descargar]', raiz);
+  const estado = $('[data-estado]', raiz);
 
   const params = new URLSearchParams(window.location.search);
   let categoria = CATEGORIAS.find((c) => c.id === params.get('tipo')) || CATEGORIAS[0];
@@ -71,18 +72,26 @@ function iniciar() {
     };
   }
 
-  function escalar() {
-    const estilo = getComputedStyle(hojas);
-    const ancho = hojas.clientWidth - parseFloat(estilo.paddingLeft) - parseFloat(estilo.paddingRight);
-    const real = btnZoom.getAttribute('aria-pressed') === 'true';
-    hojas.style.setProperty('--escala', real ? 1 : Math.min(1, Math.max(0.2, ancho / A4_PX)).toFixed(4));
+  /* Cada cambio arma de nuevo; si llegan dos seguidos, gana el último */
+  let turno = 0;
+  async function pintar() {
+    const mio = ++turno;
+    try {
+      const p = await maquetar(categoria, documento, datos());
+      if (mio !== turno) return;
+      const total = p.paginas.length;
+      hojas.innerHTML = p.paginas.map((_, i) => p.svg(i, `${documento.titulo}, página ${i + 1} de ${total}`)).join('');
+      titulo.textContent = `${documento.titulo} · ${total} ${total === 1 ? 'página' : 'páginas'}`;
+    } catch (err) {
+      console.error('[KRATEROI] No se pudo armar la vista previa:', err);
+    }
   }
 
-  function pintar() {
-    hojas.innerHTML = componer(categoria, documento, datos());
-    titulo.textContent = `${documento.titulo} · ${documento.paginas.length} páginas`;
-    escalar();
-  }
+  let espera = 0;
+  const pintarLuego = () => {
+    window.clearTimeout(espera);
+    espera = window.setTimeout(pintar, 120);
+  };
 
   function recordar() {
     const url = new URL(window.location.href);
@@ -108,9 +117,8 @@ function iniciar() {
     pintar();
   });
 
-  /* Los campos de texto actualizan la vista mientras se escribe */
   form.addEventListener('input', (e) => {
-    if (e.target.type === 'text') pintar();
+    if (e.target.type === 'text') pintarLuego();
   });
 
   /* "Restablecer" vuelve a los datos de ejemplo, sin cambiar de documento */
@@ -127,21 +135,22 @@ function iniciar() {
     btnZoom.setAttribute('aria-pressed', String(real));
     btnZoom.textContent = real ? 'Ajustar al ancho' : 'Ver a tamaño real';
     hojas.classList.toggle('gen-hojas--real', real);
-    escalar();
   });
 
-  /* El nombre del PDF sale del título de la pestaña al imprimir */
-  const tituloOriginal = document.title;
-  window.addEventListener('beforeprint', () => {
-    document.title = `Krateroi - ${documento.titulo} - ${datos().empresa}`;
+  btnDescargar.addEventListener('click', async () => {
+    btnDescargar.disabled = true;
+    estado.textContent = 'Preparando el PDF…';
+    try {
+      const p = await maquetar(categoria, documento, datos());
+      descargarInforme(await p.pdf(), `krateroi-${documento.id}-demostracion.pdf`);
+      estado.textContent = 'Listo: el PDF se descargó.';
+    } catch (err) {
+      console.error('[KRATEROI] No se pudo crear el PDF de demostración:', err);
+      estado.textContent = 'No se pudo crear el PDF. Inténtalo de nuevo.';
+    } finally {
+      btnDescargar.disabled = false;
+    }
   });
-  window.addEventListener('afterprint', () => {
-    document.title = tituloOriginal;
-  });
-  btnImprimir.addEventListener('click', () => window.print());
-
-  if ('ResizeObserver' in window) new ResizeObserver(escalar).observe(hojas);
-  else window.addEventListener('resize', escalar);
 }
 
 try {
