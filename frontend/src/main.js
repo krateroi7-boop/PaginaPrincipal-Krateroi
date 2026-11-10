@@ -16,6 +16,7 @@ import { repartirContacto } from './components/contacto.js';
 import { iniciarSolicitud } from './components/solicitud.js';
 import { iniciarVolver } from './components/volver.js';
 import { iniciarChat } from './components/chat-widget.js';
+import { iniciarSliders } from './components/slider.js';
 
 function arrancar(nombre, fn) {
   try {
@@ -28,6 +29,7 @@ function arrancar(nombre, fn) {
 function iniciar() {
   arrancar('los datos de contacto', repartirContacto);
   arrancar('la navegación', iniciarNavegacion);
+  arrancar('los slides', iniciarSliders);
   arrancar('la solicitud por etapas', iniciarSolicitud);
   arrancar('la vuelta desde los documentos', iniciarVolver);
   arrancar('el asistente', iniciarChat);

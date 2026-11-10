@@ -14,7 +14,11 @@ function avanceDeLectura() {
   const progreso = $('#progreso');
   const btnArriba = $('#btnArriba');
   const enlaces = $$('.topbar-nav a');
-  const secciones = enlaces.map((a) => $(a.getAttribute('href')));
+  // Términos y Privacidad apuntan a otra página: no tienen sección que marcar
+  const secciones = enlaces.map((a) => {
+    const destino = a.getAttribute('href') || '';
+    return destino.startsWith('#') ? $(destino) : null;
+  });
   let pendiente = false;
 
   function alDesplazar() {

@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         terminos: resolve(__dirname, 'terminos.html'),
+        documentos: resolve(__dirname, 'documentos.html'),
       },
     },
   },

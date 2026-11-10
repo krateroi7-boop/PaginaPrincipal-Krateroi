@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Generador de documentos | Krateroi</title>
+<meta name="description" content="Demostración del formato de documentos de Krateroi: genera muestras de documentos estratégicos, operativos, legales, técnicos y comerciales con el diseño de nuestros informes." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="%SITE_URL%/documentos" />
+<meta name="theme-color" content="#021B59" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:site_name" content="Krateroi" />
+<meta property="og:url" content="%SITE_URL%/documentos" />
+<meta property="og:title" content="Generador de documentos | Krateroi" />
+<meta property="og:description" content="Muestras de documentos con el formato de informe de Krateroi." />
+<meta property="og:image" content="%SITE_URL%/assets/images/og-krateroi.jpg" />
+
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" href="/assets/images/krateroi-icon.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="stylesheet" href="/src/styles/variables.css" />
+<link rel="stylesheet" href="/src/styles/styles.css" />
+<link rel="stylesheet" href="/src/styles/remake.css" />
+<link rel="stylesheet" href="/src/styles/editorial.css" />
+<link rel="stylesheet" href="/src/styles/oferta.css" />
+<link rel="stylesheet" href="/src/styles/estructura.css" />
+<link rel="stylesheet" href="/src/styles/documento.css" />
+<link rel="stylesheet" href="/src/styles/generador.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header id="topbar" class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="/" aria-label="Volver al inicio">
+      <img class="brand-logo" src="/assets/images/krateroi-logo-h.png" alt="Krateroi" width="1107" height="220" />
+    </a>
+
+    <nav class="topbar-nav" aria-label="Navegación principal">
+      <a href="/#servicios">Auditorías</a>
+      <a href="/#soluciones">Digital y técnico</a>
+      <a href="/#apoyo-legal">Apoyo legal</a>
+      <a href="/documentos" aria-current="page">Documentos</a>
+      <a href="/#precios">Precios</a>
+      <a href="/#contacto">Contacto</a>
+      <a href="/#preguntas">Preguntas</a>
+      <a href="/terminos">Términos</a>
+      <a href="/terminos#t11">Privacidad</a>
+    </nav>
+
+    <div class="topbar-actions">
+      <a class="btn btn-primary btn-md topbar-cta" href="/#contacto">Iniciar proyecto</a>
+      <button id="btnMenu" class="icon-btn menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuMovil">
+        <svg class="i-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" hidden><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="menuMovil" class="mobile-menu" aria-label="Menú móvil">
+    <div class="container">
+      <ul>
+        <li><a href="/#servicios">Auditoría digital y legal</a></li>
+        <li><a href="/#soluciones">Apoyo digital y técnico</a></li>
+        <li><a href="/#apoyo-legal">Apoyo legal</a></li>
+        <li><a href="/documentos" aria-current="page">Documentos</a></li>
+        <li><a href="/#precios">Precios</a></li>
+        <li><a href="/#preguntas">Preguntas frecuentes</a></li>
+        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="/terminos">Términos</a></li>
+        <li><a href="/terminos#t11">Privacidad</a></li>
+        <li><a class="btn btn-primary btn-md btn-block" href="/#contacto">Contar mi caso</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <section class="gen-hero">
+    <div class="container">
+      <div class="section-head">
+        <span class="gen-etiqueta">Demostración</span>
+        <h1 class="h-section">Generador de documentos.</h1>
+        <p class="lead">Elige un tipo de documento, escribe el nombre de tu empresa y mira cómo quedaría con el formato de informe de Krateroi. Los ejemplos son genéricos y solo muestran el diseño.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gen" data-generador aria-label="Generador de documentos">
+    <div class="container gen-grid">
+
+      <form class="gen-panel" id="genForm" novalidate>
+        <fieldset class="gen-grupo">
+          <legend><span class="gen-paso">01</span>Tipo de documento</legend>
+          <div class="gen-categorias" data-categorias></div>
+        </fieldset>
+
+        <fieldset class="gen-grupo">
+          <legend><span class="gen-paso">02</span>Plantilla</legend>
+          <div class="gen-plantillas" data-plantillas></div>
+        </fieldset>
+
+        <fieldset class="gen-grupo">
+          <legend><span class="gen-paso">03</span>Datos de portada</legend>
+          <label class="gen-campo">
+            <span>Empresa</span>
+            <input name="empresa" type="text" maxlength="60" value="Empresa Demo SpA" autocomplete="organization" />
+          </label>
+          <label class="gen-campo">
+            <span>Responsable</span>
+            <input name="responsable" type="text" maxlength="60" value="Equipo de proyectos" />
+          </label>
+          <label class="gen-campo">
+            <span>Fecha</span>
+            <input name="fecha" type="date" />
+          </label>
+        </fieldset>
+
+        <div class="gen-acciones">
+          <button class="btn btn-primary btn-md" type="button" data-imprimir>Guardar como PDF</button>
+          <button class="btn btn-outline btn-md" type="reset">Restablecer</button>
+        </div>
+        <p class="gen-aviso">Documento de demostración: contenido genérico, sin validez legal ni técnica.</p>
+      </form>
+
+      <div class="gen-vista">
+        <div class="gen-vista-barra">
+          <p class="gen-vista-titulo" data-titulo aria-live="polite"></p>
+          <button class="gen-zoom" type="button" data-zoom aria-pressed="false">Ver a tamaño real</button>
+        </div>
+        <div class="gen-hojas" data-hojas>
+          <noscript><p class="gen-sin-js">El generador necesita JavaScript para armar la vista previa.</p></noscript>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-top footer-solo-logo">
+    <a class="brand brand-pie" href="/" aria-label="Volver al inicio">
+      <img class="brand-logo" src="/assets/images/krateroi-logo-v.png" alt="Krateroi" width="395" height="298" />
+    </a>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p><span id="anio">2026</span> KRATEROI · Auditoría legal y digital, software e IA para empresas. Región Metropolitana, Chile.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.js"></script>
+<script type="module" src="/src/documentos.js"></script>
+</body>
+</html>

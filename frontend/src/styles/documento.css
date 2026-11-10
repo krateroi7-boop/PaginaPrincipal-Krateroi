@@ -1,0 +1,312 @@
+/* Hoja A4 con el formato del informe técnico de Krateroi: barra azul
+   marino con el logo, títulos con número en monoespaciada, tablas de
+   líneas finas y tarjetas azules. Sin sombras ni brillos. Todo queda
+   dentro de .kd-hoja para no tocar el resto del sitio. */
+
+.kd-hoja {
+  --kd-navy: #021b59;
+  --kd-navy-top: #03194f;
+  --kd-navy-card: #0f2a66;
+  --kd-ink: #021b59;
+  --kd-text: #45526b;
+  --kd-muted: #6b7890;
+  --kd-line: #d3dcea;
+  --kd-primary: #60a5fa;
+  --kd-primary-ink: #1f559f;
+  --kd-sky: #93c5fd;
+  --kd-on-navy: #cbd5e1;
+  --kd-navy-line: rgba(255, 255, 255, .14);
+  --kd-sans: "Segoe UI Variable Text", "Segoe UI", Inter, system-ui, sans-serif;
+  --kd-display: "Segoe UI Variable Display", "Segoe UI", Inter, system-ui, sans-serif;
+  --kd-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  color: var(--kd-text);
+  color-scheme: light;
+  font-family: var(--kd-sans);
+  font-size: 12px;
+  line-height: 1.55;
+  text-align: left;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.kd-hoja * { box-sizing: border-box; margin: 0; padding: 0; }
+.kd-hoja ol, .kd-hoja ul { list-style: none; }
+
+.kd-wrap { padding-left: 46px; padding-right: 46px; }
+.kd-content { flex: 1 1 auto; padding-top: 6px; }
+
+/* -- Barra y portada ------------------------------------------ */
+
+.kd-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  height: 46px;
+  background: var(--kd-navy-top);
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+.kd-logo { display: block; width: auto; max-width: none; height: 20px; }
+.kd-topbar-meta {
+  font-family: var(--kd-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--kd-sky);
+}
+.kd-masthead .kd-topbar { height: 54px; }
+.kd-masthead .kd-logo { height: 24px; }
+
+.kd-title-block { background: var(--kd-navy); padding-top: 40px; padding-bottom: 32px; }
+.kd-label {
+  font-family: var(--kd-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--kd-primary);
+}
+.kd-hoja .kd-h1 {
+  margin-top: 12px;
+  font-family: var(--kd-display);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.035em;
+  color: #fff;
+  text-wrap: balance;
+}
+.kd-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 18px;
+  margin-top: 26px;
+}
+.kd-meta div { border-top: 1px solid var(--kd-navy-line); padding-top: 9px; }
+.kd-meta dt {
+  font-family: var(--kd-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--kd-sky);
+}
+.kd-meta dd {
+  margin-top: 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+/* -- Secciones ------------------------------------------------ */
+
+.kd-num { font-family: var(--kd-mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--kd-primary-ink); }
+.kd-sec { margin-top: 24px; }
+.kd-hoja .kd-sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding-top: 13px;
+  border-top: 1px solid var(--kd-line);
+  font-family: var(--kd-display);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--kd-ink);
+}
+.kd-body { font-size: 12.5px; line-height: 1.6; }
+.kd-body + .kd-body { margin-top: 8px; }
+.kd-note { margin-top: 10px; font-size: 11px; color: var(--kd-muted); }
+
+/* -- Tablas --------------------------------------------------- */
+
+.kd-tabla { width: 100%; border-collapse: collapse; }
+.kd-tabla th {
+  padding: 0 12px 8px 0;
+  border-bottom: 1.5px solid var(--kd-ink);
+  font-family: var(--kd-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--kd-primary-ink);
+}
+.kd-tabla td {
+  padding: 7px 12px 7px 0;
+  border-bottom: 1px solid var(--kd-line);
+  vertical-align: top;
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+.kd-tabla td:first-child { font-weight: 700; color: var(--kd-ink); }
+.kd-tabla th:last-child, .kd-tabla td:last-child { padding-right: 0; }
+.kd-tabla .kd-der { text-align: right; }
+.kd-tabla td.kd-der { font-weight: 700; color: var(--kd-ink); white-space: nowrap; }
+
+.kd-estado {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px solid #bcd0ee;
+  border-radius: 99px;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: var(--kd-primary-ink);
+  background: #eef4fd;
+}
+.kd-estado[data-nivel="medio"] { background: #dbe8fb; border-color: #a9c4ec; }
+.kd-estado[data-nivel="fuerte"] { background: var(--kd-ink); border-color: var(--kd-ink); color: #fff; }
+
+/* -- Rejilla, lista y cifras ---------------------------------- */
+
+.kd-rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; }
+.kd-celda { display: grid; grid-template-columns: 30px 1fr; padding: 13px 0 14px; border-top: 1px solid var(--kd-line); }
+.kd-celda .kd-num { padding-top: 2px; }
+.kd-hoja .kd-celda h4 { font-size: 13.5px; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; color: var(--kd-ink); }
+.kd-celda p { grid-column: 2; margin-top: 4px; font-size: 11.5px; line-height: 1.5; }
+
+.kd-lista li { display: grid; grid-template-columns: 30px 1fr; align-items: start; padding: 10px 0 11px; border-top: 1px solid var(--kd-line); }
+.kd-lista li:last-child { border-bottom: 1px solid var(--kd-line); }
+.kd-n {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 99px;
+  background: #e6eefb;
+  font-family: var(--kd-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--kd-primary-ink);
+}
+.kd-hoja .kd-lista h4 { font-size: 12.5px; font-weight: 700; line-height: 1.3; color: var(--kd-ink); }
+.kd-lista p { margin-top: 2px; font-size: 11.5px; line-height: 1.5; }
+
+.kd-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 18px; }
+.kd-kpis div { padding-top: 10px; border-top: 1.5px solid var(--kd-ink); }
+.kd-kpis b {
+  display: block;
+  font-family: var(--kd-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: var(--kd-ink);
+}
+.kd-kpis span {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--kd-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--kd-primary-ink);
+}
+
+.kd-firmas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 54px; }
+.kd-firmas div { display: grid; gap: 3px; }
+.kd-linea { display: block; height: 1px; margin-bottom: 8px; background: var(--kd-ink); }
+.kd-firmas b { font-size: 12px; color: var(--kd-ink); }
+.kd-firmas span:last-child { font-family: var(--kd-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--kd-primary-ink); }
+
+/* -- Tarjeta azul --------------------------------------------- */
+
+.kd-alt { padding: 19px 22px 14px; background: var(--kd-navy-card); color: var(--kd-on-navy); }
+.kd-alt-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.kd-alt .kd-label { font-size: 9.5px; }
+.kd-hoja .kd-alt-head h4 {
+  margin-top: 5px;
+  font-family: var(--kd-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+.kd-alt-result { margin-top: 6px; font-size: 11.5px; font-weight: 600; line-height: 1.4; color: #fff; }
+.kd-alt-result .kd-label { margin-right: 8px; font-size: 8.5px; }
+.kd-alt-cifra { flex: none; text-align: right; }
+.kd-alt-cifra small {
+  display: block;
+  font-family: var(--kd-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--kd-sky);
+}
+.kd-alt-cifra b {
+  display: block;
+  font-family: var(--kd-display);
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: #fff;
+}
+.kd-alt-cifra span { display: block; font-size: 10px; color: var(--kd-on-navy); }
+.kd-alt-desc { margin-top: 9px; font-size: 11.5px; line-height: 1.5; }
+
+.kd-flow-label { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.kd-flow-label::after { content: ""; flex: 1; height: 1px; background: var(--kd-navy-line); }
+.kd-flow { display: grid; grid-template-columns: repeat(var(--pasos, 6), 1fr); margin: 10px 0 12px; }
+.kd-flow li { position: relative; padding-right: 8px; }
+.kd-flow li::before { content: ""; position: absolute; top: 10.5px; left: 22px; right: 0; height: 1px; background: rgba(255, 255, 255, .25); }
+.kd-flow li:last-child::before { display: none; }
+.kd-dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 99px;
+  background: #1d3c7c;
+  font-family: var(--kd-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: #bfdbfe;
+}
+.kd-flow p { margin-top: 7px; font-size: 10.5px; font-weight: 600; line-height: 1.35; color: #fff; }
+
+.kd-alt .kd-tabla th { color: var(--kd-sky); border-bottom-color: rgba(255, 255, 255, .45); }
+.kd-alt .kd-tabla td { border-bottom-color: var(--kd-navy-line); color: var(--kd-on-navy); }
+.kd-alt .kd-tabla td:first-child, .kd-alt .kd-tabla td.kd-der { color: #fff; }
+.kd-alt .kd-tabla tr.kd-total td { padding-top: 9px; border-top: 1.5px solid rgba(255, 255, 255, .45); border-bottom: 0; font-weight: 700; color: #fff; }
+.kd-alt .kd-tabla tr.kd-total td:last-child { font-family: var(--kd-display); font-size: 15px; letter-spacing: -.02em; }
+.kd-alt .kd-estado { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .28); color: #fff; }
+.kd-alt .kd-estado[data-nivel="medio"] { background: rgba(147, 197, 253, .2); }
+.kd-alt .kd-estado[data-nivel="fuerte"] { background: #fff; border-color: #fff; color: var(--kd-ink); }
+
+/* -- Pie de página -------------------------------------------- */
+
+.kd-runfoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: none;
+  height: 40px;
+  margin: 0 46px;
+  border-top: 1px solid var(--kd-line);
+  font-size: 9.5px;
+  color: var(--kd-muted);
+}
+.kd-runfoot b { font-weight: 700; letter-spacing: .14em; color: var(--kd-ink); }
+.kd-pg { font-family: var(--kd-mono); }

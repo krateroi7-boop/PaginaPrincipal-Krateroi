@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="/src/styles/remake.css" />
 <link rel="stylesheet" href="/src/styles/editorial.css" />
 <link rel="stylesheet" href="/src/styles/oferta.css" />
+<link rel="stylesheet" href="/src/styles/estructura.css" />
 
 <!-- datos-estructurados -->
 </head>
@@ -42,15 +43,19 @@
 <header id="topbar" class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="#inicio" aria-label="Volver al inicio">
-      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="720" height="240" />
+      <img class="brand-logo" src="/assets/images/krateroi-logo-h.png" alt="Krateroi" width="1107" height="220" />
     </a>
 
     <nav class="topbar-nav" aria-label="Navegación principal">
       <a href="#servicios">Auditorías</a>
       <a href="#soluciones">Digital y técnico</a>
-      <a href="#apoyo-legal">Legal</a>
+      <a href="#apoyo-legal">Apoyo legal</a>
+      <a href="#documentos">Documentos</a>
       <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="/terminos">Términos</a>
+      <a href="/terminos#t11">Privacidad</a>
     </nav>
 
     <div class="topbar-actions">
@@ -70,11 +75,14 @@
         <li><a href="#problemas">Problemas</a></li>
         <li><a href="#soluciones">Apoyo digital y técnico</a></li>
         <li><a href="#apoyo-legal">Apoyo legal</a></li>
+        <li><a href="#documentos">Documentos</a></li>
         <li><a href="#metodologia">Metodología</a></li>
         <li><a href="#precios">Precios</a></li>
         <li><a href="#condiciones">Condiciones</a></li>
         <li><a href="#preguntas">Preguntas frecuentes</a></li>
         <li><a href="#contacto">Contacto</a></li>
+        <li><a href="/terminos">Términos</a></li>
+        <li><a href="/terminos#t11">Privacidad</a></li>
         <li><a class="btn btn-primary btn-md btn-block" href="#contacto" data-abre-solicitud>Contar mi caso</a></li>
       </ul>
     </div>
@@ -83,7 +91,7 @@
 
 <main id="contenido">
 
-  <section id="inicio" class="hero">
+  <section id="inicio" class="hero hero-con-fondo">
     <div class="container hero-grid">
       <div class="hero-copy">
         <h1 class="h-display reveal d1">Auditoría legal y digital para tu empresa.</h1>
@@ -93,15 +101,6 @@
           <a class="btn btn-outline btn-lg" href="#precios">Ver precios</a>
         </div>
       </div>
-      <figure class="hero-example reveal d2">
-        <figcaption><strong>Solicitud automatizada</strong></figcaption>
-        <ol class="example-steps">
-          <li><span class="example-number">01</span><div><strong>Captura</strong><p>El formulario o mensaje inicia el flujo.</p></div></li>
-          <li><span class="example-number">02</span><div><strong>Registro</strong><p>Los datos se guardan en un solo lugar.</p></div></li>
-          <li><span class="example-number">03</span><div><strong>Asignación</strong><p>El caso llega a la persona responsable.</p></div></li>
-          <li><span class="example-number">04</span><div><strong>Seguimiento</strong><p>El sistema recuerda los pendientes y registra cada respuesta.</p></div></li>
-        </ol>
-      </figure>
     </div>
   </section>
 
@@ -235,104 +234,90 @@
     <div class="container">
       <div class="section-head reveal">
         <h2 class="h-section">Apoyo digital y técnico.</h2>
+        <p class="lead">Cuéntanos qué te está costando y te decimos cómo lo resolveríamos. Una situación a la vez: desliza o usa las flechas.</p>
       </div>
 
-      <div class="grid g3">
-        <article class="card card-lift solution reveal">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9h4M7 12h7"/></svg>
-          </span>
-          <h3 class="h-card">Apoyo digital y tecnológico</h3>
-          <p>Ayudamos a elegir, configurar y mejorar las herramientas de trabajo de tu empresa. Resolvemos problemas de uso e integración sin obligarte a cambiar todo el sistema.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d1">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>
-          </span>
-          <h3 class="h-card">Desarrollo a la medida</h3>
-          <p>Sistemas robustos adaptados al núcleo de tu negocio. Construimos lo que tu operación necesita, no lo que trae un paquete estándar que después hay que forzar.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d2">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h6M14 6h6M4 12h10M18 12h2M4 18h4M12 18h8"/><circle cx="12" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>
-          </span>
-          <h3 class="h-card">Automatización de procesos</h3>
-          <p>Eliminación de tareas manuales y repetitivas para ahorrar tiempo: mover información, generar documentos, avisar cuando algo pasa, encadenar aprobaciones y dejar registro de cada paso.</p>
-        </article>
-
-        <article class="card card-lift solution reveal">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>
-          </span>
-          <h3 class="h-card">Desarrollo web corporativo</h3>
-          <p>Páginas web y portales de alta velocidad y conversión, pensados para cargar rápido, verse bien en cualquier pantalla y ser fáciles de mantener por tu equipo.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d1">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
-          </span>
-          <h3 class="h-card">Bases de datos e integraciones</h3>
-          <p>Conexión de sistemas que hoy no se hablan, migración y arquitectura de datos. El objetivo: que el dato se escriba una sola vez y llegue donde tiene que llegar.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d2">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></svg>
-          </span>
-          <h3 class="h-card">Servidores locales e infraestructura</h3>
-          <p>Instalamos y configuramos servidores dentro de tu empresa para alojar aplicaciones, datos o modelos de IA. Definimos accesos, respaldos y mantenimiento según el uso previsto.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d2">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 4v3M9 12v2M15 12v2M9.5 16.5h5"/></svg>
-          </span>
-          <h3 class="h-card">Asistentes y agentes con IA</h3>
-          <p>Apoyo automático para consultas frecuentes, clasificación de solicitudes o primeras respuestas, siempre con una persona a cargo de lo que importa.</p>
-        </article>
-
-        <article class="card card-lift solution reveal">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M11 6 6 16M13 6l5 10M7 18h10"/></svg>
-          </span>
-          <h3 class="h-card">IA multiagente e integración</h3>
-          <p>Implementamos varios agentes que consultan datos, ejecutan tareas y revisan resultados dentro de un mismo flujo. Definimos permisos, límites y supervisión humana.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d1">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v12H3zM8 21h8M12 17v4M7 9h10M7 12h6"/></svg>
-          </span>
-          <h3 class="h-card">Capacitación en IA y herramientas</h3>
-          <p>Damos clases prácticas para que tu equipo use los agentes y herramientas entregadas: tareas, límites, revisión de resultados y resolución de dudas en casos reales.</p>
-        </article>
-
-        <article class="card card-lift solution reveal">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg>
-          </span>
-          <h3 class="h-card">Documentos e información suelta</h3>
-          <p>Leer, ordenar y extraer lo relevante de correos, formularios, contratos o planillas que hoy se revisan uno por uno.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d1">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M8 16v-4M12 16V8M16 16v-6M20 16v-9"/></svg>
-          </span>
-          <h3 class="h-card">Datos, reportes y alertas</h3>
-          <p>Reunir en un solo lugar la información que hoy está repartida, dejarla actualizada sola y avisar cuando algo se sale de lo esperado. El objetivo no es un tablero bonito: es que alguien pueda decidir con eso.</p>
-        </article>
-
-        <article class="card card-lift solution reveal d2">
-          <span class="icon-badge" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 1-8.5 6"/><path d="M3 4v5h5"/><circle cx="12" cy="12" r="2.5"/></svg>
-          </span>
-          <h3 class="h-card">Acompañamiento y mantenimiento</h3>
-          <p>Lo que se implementa se sigue usando cuando cambian los procesos y las herramientas. Revisamos que siga funcionando, resolvemos incidencias dentro del alcance y hacemos los ajustes menores que aparezcan.</p>
-        </article>
+      <div class="slider" data-slider role="region" aria-roledescription="carrusel" aria-label="Apoyo digital y técnico">
+        <div class="slider-track" tabindex="0">
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="1 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9h4M7 12h7"/></svg></span>
+            <h3 class="slide-titulo">Apoyo digital y tecnológico</h3>
+            <p class="slide-pregunta">¿Tu equipo pelea con sus propias herramientas?</p>
+            <p class="slide-texto">Te ayudamos a elegir, configurar y mejorar las herramientas con las que ya trabajas. Resolvemos los problemas de uso e integración sin obligarte a cambiar todo el sistema.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg></span>
+            <h3 class="slide-titulo">Desarrollo a la medida</h3>
+            <p class="slide-pregunta">¿Ningún programa estándar calza con tu forma de trabajar?</p>
+            <p class="slide-texto">Construimos el sistema alrededor de cómo opera tu negocio, no al revés. Así no tienes que forzar un paquete estándar que después nadie quiere usar.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h6M14 6h6M4 12h10M18 12h2M4 18h4M12 18h8"/><circle cx="12" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></span>
+            <h3 class="slide-titulo">Automatización de procesos</h3>
+            <p class="slide-pregunta">¿Hay tareas que nadie quiere hacer, pero alguien tiene que hacer?</p>
+            <p class="slide-texto">Le quitamos a tu equipo el trabajo manual y repetitivo: mover información, generar documentos, avisar cuando algo pasa, encadenar aprobaciones y dejar registro de cada paso.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span>
+            <h3 class="slide-titulo">Desarrollo web corporativo</h3>
+            <p class="slide-pregunta">¿Tu página web no está a la altura de tu empresa?</p>
+            <p class="slide-texto">Hacemos páginas y portales que cargan rápido, se ven bien en cualquier pantalla y que tu propio equipo puede mantener sin complicarse.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="5 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+            <h3 class="slide-titulo">Bases de datos e integraciones</h3>
+            <p class="slide-pregunta">¿El mismo dato vive en tres lugares distintos?</p>
+            <p class="slide-texto">Conectamos los sistemas, migramos la información y ordenamos la arquitectura de datos para que cada dato se escriba una sola vez y llegue donde tiene que llegar.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="6 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6"/></svg></span>
+            <h3 class="slide-titulo">Servidores locales e infraestructura</h3>
+            <p class="slide-pregunta">¿Prefieres que tus datos se queden dentro de la empresa?</p>
+            <p class="slide-texto">Instalamos y configuramos servidores en tu oficina para alojar aplicaciones, datos o modelos de IA. Dejamos definidos los accesos, los respaldos y el mantenimiento según el uso que les vas a dar.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="7 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 4v3M9 12v2M15 12v2M9.5 16.5h5"/></svg></span>
+            <h3 class="slide-titulo">Asistentes y agentes con IA</h3>
+            <p class="slide-pregunta">¿Quieres atender consultas incluso fuera de horario?</p>
+            <p class="slide-texto">Un asistente con IA puede responder lo frecuente, clasificar solicitudes o dar una primera respuesta, siempre con una persona de tu equipo a cargo de lo que importa.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="8 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M11 6 6 16M13 6l5 10M7 18h10"/></svg></span>
+            <h3 class="slide-titulo">IA multiagente e integración</h3>
+            <p class="slide-pregunta">¿Un solo asistente se queda corto para tu proceso?</p>
+            <p class="slide-texto">Implementamos varios agentes que consultan datos, ejecutan tareas y revisan resultados dentro de un mismo flujo. Definimos permisos y límites, y tu equipo mantiene la supervisión.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="9 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v12H3zM8 21h8M12 17v4M7 9h10M7 12h6"/></svg></span>
+            <h3 class="slide-titulo">Capacitación en IA y herramientas</h3>
+            <p class="slide-pregunta">¿Tu equipo quiere usar IA, pero no sabe por dónde partir?</p>
+            <p class="slide-texto">Damos clases prácticas, con casos reales de tu trabajo, para que tu equipo use los agentes y herramientas entregadas: qué pedirles, dónde están sus límites y cómo revisar lo que hacen.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="10 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></svg></span>
+            <h3 class="slide-titulo">Documentos e información suelta</h3>
+            <p class="slide-pregunta">¿Se van horas buscando dentro de correos y contratos?</p>
+            <p class="slide-texto">Leemos, ordenamos y extraemos lo importante de correos, formularios, contratos o planillas, para que tu equipo dedique su tiempo a decidir y no a buscar.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="11 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M8 16v-4M12 16V8M16 16v-6M20 16v-9"/></svg></span>
+            <h3 class="slide-titulo">Datos, reportes y alertas</h3>
+            <p class="slide-pregunta">¿Decides con datos de hace un mes?</p>
+            <p class="slide-texto">Juntamos en un solo lugar la información que hoy está repartida, la mantenemos al día sola y te avisamos cuando algo se sale de lo esperado. No buscamos un tablero bonito: buscamos que puedas decidir con él.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="12 de 12">
+            <span class="slide-icono" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 1-8.5 6"/><path d="M3 4v5h5"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+            <h3 class="slide-titulo">Acompañamiento y mantenimiento</h3>
+            <p class="slide-pregunta">¿Te preocupa qué pasa después de la entrega?</p>
+            <p class="slide-texto">Seguimos contigo cuando cambian tus procesos o tus herramientas. Revisamos que todo siga funcionando, resolvemos las incidencias dentro del alcance y hacemos los ajustes menores que aparezcan.</p>
+          </article>
+        </div>
+        <div class="slider-controles">
+          <button class="slider-flecha" type="button" data-anterior aria-label="Ver la anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="slider-puntos" data-puntos></div>
+          <span class="slider-cuenta" data-cuenta>1 / 12</span>
+          <button class="slider-flecha" type="button" data-siguiente aria-label="Ver la siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
       </div>
 
       <div class="limits reveal">
@@ -351,31 +336,110 @@
     <div class="container">
       <div class="section-head reveal">
         <h2 id="legal-title" class="h-section">Apoyo legal.</h2>
+        <p class="lead">Lo legal, explicado en simple y aplicado a cómo trabaja tu empresa.</p>
       </div>
-      <div class="legal-grid">
-        <article class="legal-item reveal">
-          <span class="legal-number" aria-hidden="true">01</span>
-          <div>
-            <h3>Protección de datos personales</h3>
-            <p>Revisamos qué datos se recogen, quién accede a ellos, cuánto tiempo se conservan y cómo se comparten. Preparamos las políticas, los contratos y las medidas que exige la Ley 21.719.</p>
-          </div>
-        </article>
-        <article class="legal-item reveal d1">
-          <span class="legal-number" aria-hidden="true">02</span>
-          <div>
-            <h3>Ciberseguridad legal</h3>
-            <p>Evaluamos qué obligaciones de la Ley Marco de Ciberseguridad aplican a tu empresa, las responsabilidades de proveedores y los protocolos de respuesta ante incidentes.</p>
-          </div>
-        </article>
-        <article class="legal-item reveal d2">
-          <span class="legal-number" aria-hidden="true">03</span>
-          <div>
-            <h3>Contratos tecnológicos e IA</h3>
-            <p>Apoyamos la revisión de acuerdos con proveedores, tratamiento de datos, propiedad intelectual y reglas para usar agentes de IA en la empresa.</p>
-          </div>
-        </article>
+      <div class="slider slider--legal" data-slider role="region" aria-roledescription="carrusel" aria-label="Apoyo legal">
+        <div class="slider-track" tabindex="0">
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="1 de 3">
+            <span class="slide-icono slide-numero" aria-hidden="true">01</span>
+            <h3 class="slide-titulo">Protección de datos personales</h3>
+            <p class="slide-pregunta">¿Sabes qué datos guardas de tus clientes y quién los ve?</p>
+            <p class="slide-texto">Revisamos contigo qué datos recoges, quién accede a ellos, cuánto tiempo se guardan y con quién se comparten. Después preparamos las políticas, los contratos y las medidas que exige la Ley 21.719.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 3">
+            <span class="slide-icono slide-numero" aria-hidden="true">02</span>
+            <h3 class="slide-titulo">Ciberseguridad legal</h3>
+            <p class="slide-pregunta">¿Qué harías mañana si tu empresa sufre un incidente?</p>
+            <p class="slide-texto">Vemos qué obligaciones de la Ley Marco de Ciberseguridad aplican a tu empresa, qué responde cada proveedor y cómo reaccionar ante un incidente, con protocolos que tu equipo pueda seguir.</p>
+          </article>
+          <article class="slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 3">
+            <span class="slide-icono slide-numero" aria-hidden="true">03</span>
+            <h3 class="slide-titulo">Contratos tecnológicos e IA</h3>
+            <p class="slide-pregunta">¿Firmaste con un proveedor sin entender bien la letra chica?</p>
+            <p class="slide-texto">Te acompañamos en la revisión de acuerdos con proveedores, tratamiento de datos y propiedad intelectual, y en las reglas para usar agentes de IA dentro de la empresa.</p>
+          </article>
+        </div>
+        <div class="slider-controles">
+          <button class="slider-flecha" type="button" data-anterior aria-label="Ver la anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="slider-puntos" data-puntos></div>
+          <span class="slider-cuenta" data-cuenta>1 / 3</span>
+          <button class="slider-flecha" type="button" data-siguiente aria-label="Ver la siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
       </div>
+
       <a class="legal-link" href="#contacto" data-abre-solicitud>Consultar por apoyo legal <span aria-hidden="true">-&gt;</span></a>
+    </div>
+  </section>
+
+  <!-- == DOCUMENTOS == -->
+  <!-- Vitrina del generador de documentos de demostración (/documentos).
+       Las miniaturas son solo dibujo: el texto real está en cada enlace. -->
+  <section id="documentos" class="section documentos" aria-labelledby="documentos-titulo">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 id="documentos-titulo" class="h-section">Documentos con formato Krateroi.</h2>
+        <p class="lead">Así se ven los informes que entregamos. Elige un tipo y genera una muestra en segundos; los ejemplos son genéricos y solo ilustran el formato.</p>
+      </div>
+
+      <ul class="vitrina reveal">
+        <li>
+          <a class="vitrina-doc" href="/documentos?tipo=estrategico">
+            <span class="mini-hoja" aria-hidden="true">
+              <span class="mini-barra"><img src="/assets/images/krateroi-logo-h.png" alt="" width="1107" height="220" loading="lazy" /></span>
+              <span class="mini-portada"><i>Documento estratégico</i><b>Plan estratégico trienal</b></span>
+              <span class="mini-cuerpo"><span class="mini-linea"></span><span class="mini-linea corta"></span><span class="mini-tabla"></span><span class="mini-tarjeta"></span></span>
+            </span>
+            <span class="vitrina-nombre">Estratégicos</span>
+            <span class="vitrina-detalle">Plan estratégico · Hoja de ruta digital</span>
+          </a>
+        </li>
+        <li>
+          <a class="vitrina-doc" href="/documentos?tipo=operativo">
+            <span class="mini-hoja" aria-hidden="true">
+              <span class="mini-barra"><img src="/assets/images/krateroi-logo-h.png" alt="" width="1107" height="220" loading="lazy" /></span>
+              <span class="mini-portada"><i>Documento operativo</i><b>Informe operativo mensual</b></span>
+              <span class="mini-cuerpo"><span class="mini-linea"></span><span class="mini-kpis"></span><span class="mini-tabla"></span><span class="mini-linea corta"></span></span>
+            </span>
+            <span class="vitrina-nombre">Operativos</span>
+            <span class="vitrina-detalle">Manual de procedimientos · Informe mensual</span>
+          </a>
+        </li>
+        <li>
+          <a class="vitrina-doc" href="/documentos?tipo=legal">
+            <span class="mini-hoja" aria-hidden="true">
+              <span class="mini-barra"><img src="/assets/images/krateroi-logo-h.png" alt="" width="1107" height="220" loading="lazy" /></span>
+              <span class="mini-portada"><i>Documento legal</i><b>Política de datos personales</b></span>
+              <span class="mini-cuerpo"><span class="mini-linea"></span><span class="mini-linea corta"></span><span class="mini-lista"></span><span class="mini-firmas"></span></span>
+            </span>
+            <span class="vitrina-nombre">Legales</span>
+            <span class="vitrina-detalle">Política de datos · Contrato de servicios</span>
+          </a>
+        </li>
+        <li>
+          <a class="vitrina-doc" href="/documentos?tipo=tecnico">
+            <span class="mini-hoja" aria-hidden="true">
+              <span class="mini-barra"><img src="/assets/images/krateroi-logo-h.png" alt="" width="1107" height="220" loading="lazy" /></span>
+              <span class="mini-portada"><i>Documento técnico</i><b>Informe técnico de arquitectura</b></span>
+              <span class="mini-cuerpo"><span class="mini-linea"></span><span class="mini-tarjeta"></span><span class="mini-rejilla"></span></span>
+            </span>
+            <span class="vitrina-nombre">Técnicos</span>
+            <span class="vitrina-detalle">Informe técnico · Requerimientos</span>
+          </a>
+        </li>
+        <li>
+          <a class="vitrina-doc" href="/documentos?tipo=comercial">
+            <span class="mini-hoja" aria-hidden="true">
+              <span class="mini-barra"><img src="/assets/images/krateroi-logo-h.png" alt="" width="1107" height="220" loading="lazy" /></span>
+              <span class="mini-portada"><i>Documento comercial</i><b>Propuesta comercial</b></span>
+              <span class="mini-cuerpo"><span class="mini-linea"></span><span class="mini-linea corta"></span><span class="mini-tabla"></span><span class="mini-rejilla"></span></span>
+            </span>
+            <span class="vitrina-nombre">Comerciales</span>
+            <span class="vitrina-detalle">Propuesta comercial · Caso de negocio</span>
+          </a>
+        </li>
+      </ul>
+
+      <a class="btn btn-primary btn-lg vitrina-cta" href="/documentos">Abrir el generador <span class="arrow" aria-hidden="true">-&gt;</span></a>
     </div>
   </section>
 
@@ -1096,24 +1160,10 @@
 </main>
 
 <footer>
-  <div class="container footer-top">
-    <a class="brand" href="#inicio">
-      <img class="brand-logo" src="/assets/images/krateroi-logo.png" alt="Krateroi" width="720" height="240" />
+  <div class="container footer-top footer-solo-logo">
+    <a class="brand brand-pie" href="#inicio" aria-label="Volver al inicio">
+      <img class="brand-logo" src="/assets/images/krateroi-logo-v.png" alt="Krateroi" width="395" height="298" />
     </a>
-
-    <nav class="footer-nav" aria-label="Enlaces del pie">
-      <a href="#servicios">Auditorías</a>
-      <a href="#soluciones">Digital y técnico</a>
-      <a href="#apoyo-legal">Apoyo legal</a>
-      <a href="#precios">Precios</a>
-      <a href="#preguntas">Preguntas</a>
-      <a href="/terminos">Términos</a>
-      <a href="/terminos#t11">Privacidad</a>
-      <a data-wa href="#contacto">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-4.1A8.6 8.6 0 1 1 8.1 20.3L3 21Z"/><path d="M8.9 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.6.5l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.2-.2.3 0 .5a6 6 0 0 0 2.4 2.1c.2.1.3.1.5-.1l.5-.6c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.2.3.4 0 .5-.3 1.1-.7 1.3-.4.2-1 .3-1.5.2a9.4 9.4 0 0 1-6-6c-.1-.6 0-1.2.3-1.7Z"/></svg>
-        WhatsApp <span data-wa-numero></span>
-      </a>
-    </nav>
   </div>
 
   <div class="footer-bottom">

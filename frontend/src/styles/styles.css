@@ -245,7 +245,7 @@ ul, ol { list-style: none; }
 .mobile-menu .btn { margin-top: 0.75rem; }
 .mobile-menu .menu-foot { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.75rem; color: var(--muted-fg); }
 
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .topbar-nav { display: flex; }
   .topbar-cta { display: inline-flex; }
   .menu-btn, .mobile-menu { display: none !important; }
