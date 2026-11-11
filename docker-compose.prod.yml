@@ -65,8 +65,8 @@ services:
       # queda igual configurado para que una llamada desde otro dominio
       # sí se rechace.
       CORS_ORIGIN: ${PUBLIC_ORIGIN}
-      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
-      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      CORREO_DESTINO: ${CORREO_DESTINO:-krateroi7@gmail.com}
       GEMINI_API_KEY: ${GEMINI_API_KEY}
       # Dentro de la red de Docker el host es el nombre del servicio, no
       # localhost: localhost dentro de un contenedor es ese contenedor.

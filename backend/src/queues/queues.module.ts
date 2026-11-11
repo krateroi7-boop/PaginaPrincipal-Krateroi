@@ -7,8 +7,8 @@ import { Redis } from 'ioredis';
    Redis.
 
    Sigue sin haber colas registradas: el único envío que hace hoy el
-   backend (la alerta de Telegram) es liviano y se resuelve de forma
-   síncrona en telegram/telegram.service.ts. BullModule queda
+   backend (el correo de cada solicitud) es liviano y se resuelve de
+   forma síncrona en correo/correo.service.ts. BullModule queda
    configurado para el día que una consulta de IA pase a costar
    minutos en vez de segundos.
 

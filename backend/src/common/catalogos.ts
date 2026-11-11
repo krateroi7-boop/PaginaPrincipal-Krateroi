@@ -3,7 +3,7 @@
 
    Son exactamente las opciones que ofrece la solicitud por etapas del
    frontend. Viven acá para que el DTO valide contra ellas y el
-   resumen de Telegram las use sin repetirlas: si el formulario suma
+   correo de la solicitud las use sin repetirlas: si el formulario suma
    una opción, se agrega en un solo lugar.
 
    Lo que no calce con estas listas se descarta en silencio. No es un

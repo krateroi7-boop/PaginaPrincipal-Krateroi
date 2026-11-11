@@ -1,8 +1,8 @@
 # Backend — API Gateway (NestJS)
 
 Recibe las peticiones del sitio, las valida y responde. Las dos integraciones
-externas ocurren acá y nunca en el navegador: el aviso de Telegram cuando llega
-una solicitud, y la consulta al modelo cuando alguien escribe al asistente.
+externas ocurren acá y nunca en el navegador: el correo con cada solicitud del
+formulario, y la consulta al modelo cuando alguien escribe al asistente.
 
 ## Requisitos
 
@@ -12,7 +12,7 @@ una solicitud, y la consulta al modelo cuando alguien escribe al asistente.
 ## Puesta en marcha
 
 ```bash
-cp .env.example .env   # completar TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, GEMINI_API_KEY, POSTGRES_PASSWORD
+cp .env.example .env   # completar RESEND_API_KEY, GEMINI_API_KEY, POSTGRES_PASSWORD
 docker compose up -d   # levanta redis y postgres
 npm install
 npm run start:dev
@@ -28,7 +28,8 @@ para no correr con credenciales a medias.
 |---|---|
 | `PORT` | Puerto HTTP del backend (default `3000`) |
 | `CORS_ORIGIN` | Único origen permitido (el dominio del frontend) |
-| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Credenciales del bot (BotFather) |
+| `RESEND_API_KEY` | Clave de Resend, por donde salen los correos de las solicitudes. La cuenta de Resend debe estar creada con el correo de `CORREO_DESTINO` |
+| `CORREO_DESTINO` / `CORREO_REMITENTE` | Destino (default `krateroi7@gmail.com`) y remitente (default `Krateroi <onboarding@resend.dev>`) |
 | `GEMINI_API_KEY` | Clave del asistente (Google AI Studio) |
 | `REDIS_HOST` / `REDIS_PORT` | Conexión de BullMQ (`docker-compose.yml`) |
 | `POSTGRES_HOST` / `POSTGRES_PORT` / `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | Conexión de TypeORM (`docker-compose.yml`) |
@@ -40,7 +41,7 @@ literales dentro del paquete que descarga el visitante.
 
 | Ruta | Qué hace | Cupo por IP |
 |---|---|---|
-| `POST /api/consulta` | Valida la solicitud del formulario, arma el resumen y lo publica en Telegram | 5 por hora |
+| `POST /api/consulta` | Valida la solicitud del formulario y la envía por correo con el informe PDF | 5 por hora |
 | `POST /api/chat` | Valida el turno nuevo y pide la respuesta al modelo | 30 por hora |
 | `GET /api/health` | Estado del proceso y de Postgres y Redis. La usa la sonda de Docker y sirve para un monitor externo | sin cupo |
 
@@ -63,12 +64,15 @@ Una carpeta por responsabilidad, con el módulo de Nest que la registra.
 |---|---|
 | `src/main.ts` | Arranque: helmet, CORS estricto, `ValidationPipe` global y puerto |
 | `src/app.module.ts` | Módulo raíz: config con Joi, límite global de peticiones y los cinco módulos del sistema |
-| `src/api/consulta.controller.ts` | `POST /api/consulta`. Valida las reglas que cruzan campos y publica el aviso |
+| `src/api/consulta.controller.ts` | `POST /api/consulta`. Valida las reglas que cruzan campos y envía la solicitud |
+| `src/api/consulta.controller.spec.ts` | Pruebas del envío con `fetch` simulado (`npx jest`) |
 | `src/api/chat.controller.ts` | `POST /api/chat`. Pasa el turno nuevo por el filtro y pide la respuesta al modelo |
 | `src/api/chat.gateway.ts` | WebSocket reservado, sin eventos. Su día llega cuando el chat pase por colas |
 | `src/api/api.module.ts` | Registra los dos controladores y el gateway |
-| `src/telegram/telegram.service.ts` | Arma el resumen de la solicitud y lo publica con la API del bot |
-| `src/telegram/telegram.module.ts` | Registra y exporta el servicio de Telegram |
+| `src/correo/correo.service.ts` | Arma el correo de la solicitud con el informe PDF y lo envía con la API de Resend |
+| `src/correo/informe-pdf.ts` | Informe PDF de la solicitud (pdf-lib) |
+| `src/correo/correo.module.ts` | Registra y exporta el servicio de correo |
+| `scripts/probar-correo.js` | `npm run probar:correo`: manda una solicitud de prueba con la clave real de Resend (del entorno o de `.env`), sin Redis ni Postgres |
 | `src/ai/gemini.service.ts` | Instrucción de sistema del agente, llamada al proveedor, reintentos y lectura de la respuesta |
 | `src/ai/ai.module.ts` | Registra y exporta el servicio del modelo |
 | `src/queues/queues.module.ts` | Conexión BullMQ/Redis lista, sin colas registradas todavía |
@@ -90,7 +94,7 @@ Una carpeta por responsabilidad, con el módulo de Nest que la registra.
 | `eslint.config.mjs` / `.prettierrc` | Estilo del código |
 
 `catalogos.ts` tiene exactamente las opciones que ofrece la solicitud por
-etapas del sitio. El DTO valida contra ellas y el resumen de Telegram las usa
+etapas del sitio. El DTO valida contra ellas y el correo de la solicitud las usa
 sin repetirlas: si el formulario suma una opción, se agrega en un solo lugar.
 Lo que no calce se descarta en silencio — no es un error del visitante, es un
 cliente manipulado.
@@ -136,16 +140,13 @@ Están comentadas en `ai/gemini.service.ts` para no volver a descubrirlas:
   Sin esa línea el límite por IP agrupaba a todo el sitio en un solo contador.
   Ver la sección de despliegue del README raíz.
 - **Config con Joi**: el proceso no arranca si falta una variable crítica.
-- Sin webhook de Telegram implementado (el bot sólo envía, no recibe), así que
-  no aplica todavía la validación de secret token. Si se agrega un webhook, hay
-  que sumar esa verificación.
 
 ## Verificación
 
 `npm run build` compila sin errores. Con las rutas montadas se comprobó, contra
 el servidor corriendo, que:
 
-- una solicitud completa llega a Telegram (con token de prueba responde 500,
+- una solicitud completa sale por correo (con clave de prueba responde 500,
   que es lo esperado: la petición salió y el proveedor la rechazó);
 - un servicio, ubicación o dolor fuera de catálogo devuelve 400;
 - un campo no declarado devuelve 400;

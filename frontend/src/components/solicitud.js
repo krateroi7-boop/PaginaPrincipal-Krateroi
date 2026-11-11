@@ -12,10 +12,9 @@
    ven en el paso 3. No viaja al backend como campo propio, porque la
    validación de allá rechaza campos que no conoce.
 
-   Lo que cambió al pasar al framework: el envío ya no habla con la
-   API de Telegram desde el navegador. Se manda al backend, que
-   valida lo mismo de nuevo, arma el resumen y publica el aviso. El
-   token dejó de existir en el cliente.
+   El envío se manda al backend, que valida lo mismo de nuevo y lo
+   entrega por correo con el informe PDF. Ninguna credencial existe
+   en el cliente.
 
    Nada se pierde a medio camino: cada respuesta se anota en un
    borrador del navegador (state/borrador.js) y al volver se ofrece
@@ -726,7 +725,7 @@ export function iniciarSolicitud() {
     return { ...datosSolicitud(), apoyo: marcados('apoyo')[0] || '' };
   }
 
-  /* El mismo resumen que arma el backend para Telegram. Acá se usa
+  /* Los mismos datos que el backend manda por correo. Acá se usa
      para copiarlo o mandarlo por WhatsApp cuando el envío falla. */
   function armarResumen() {
     const d = datosSolicitud();
@@ -808,7 +807,7 @@ export function iniciarSolicitud() {
         limites.anotar('contacto');
         estado.textContent = err.message;
       } else if (!err.status || err.status >= 500) {
-        /* Si la API o Telegram fallan, la solicitud no se marca como
+        /* Si la API o el correo fallan, la solicitud no se marca como
            enviada. Quedan el resumen y el PDF para una via alternativa. */
         estado.textContent = `${err.message} Puedes copiar el resumen o descargar el informe PDF y enviarlo por otra vía.`;
         resumen.textContent = armarResumen();

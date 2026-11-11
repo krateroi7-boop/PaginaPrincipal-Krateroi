@@ -6,7 +6,6 @@ import { ThrottlerStorageRedisService } from '@nest-lab/throttler-storage-redis'
 import { Redis } from 'ioredis';
 import { validationSchema } from './common/config/validation.schema';
 import { ApiModule } from './api/api.module';
-import { TelegramModule } from './telegram/telegram.module';
 import { AiModule } from './ai/ai.module';
 import { QueuesModule, REDIS } from './queues/queues.module';
 import { DatabaseModule } from './database/database.module';
@@ -36,7 +35,6 @@ import { DatabaseModule } from './database/database.module';
       }),
     }),
     DatabaseModule,
-    TelegramModule,
     AiModule,
     ApiModule,
   ],

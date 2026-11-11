@@ -4,8 +4,8 @@ Monorepo con dos proyectos independientes:
 
 - **`frontend/`** — el sitio (Vanilla JS + Vite).
 - **`backend/`** — API Gateway (NestJS) que valida lo que llega del sitio, envía
-  el aviso de Telegram y consulta al modelo del asistente. Nunca hay tokens en
-  el navegador.
+  por correo cada solicitud del formulario y consulta al modelo del asistente.
+  Nunca hay claves en el navegador.
 
 Arquitectura orientada a eventos, pensada para poder crecer sin bloquear la
 página ni el bot cuando el procesamiento de IA deje de resolverse en segundos:
@@ -13,8 +13,8 @@ página ni el bot cuando el procesamiento de IA deje de resolverse en segundos:
 1. **Recepción (`backend/src/api`)**: el gateway NestJS recibe la petición del
    frontend, la valida (DTOs con `class-validator` más el filtro de texto
    natural) y responde.
-2. **Procesamiento (`backend/src/telegram`, `backend/src/ai`)**: el aviso de
-   Telegram y la consulta al modelo salen desde acá. Cuando una consulta pase a
+2. **Procesamiento (`backend/src/correo`, `backend/src/ai`)**: el correo de
+   cada solicitud y la consulta al modelo salen desde acá. Cuando una consulta pase a
    costar minutos en vez de segundos, se encola con BullMQ/Redis
    (`backend/src/queues`) en vez de bloquear la respuesta.
 3. **Entrega**: hoy la respuesta vuelve en la misma petición HTTP. A futuro, con
@@ -94,7 +94,7 @@ contrato HTTP de la tabla de endpoints.
 | Ruta | Contenido |
 |---|---|
 | `frontend/` | El sitio: dos páginas en Vanilla JS empaquetadas con Vite. Detalle en [`frontend/README.md`](frontend/README.md) |
-| `backend/` | API Gateway NestJS: validación, Telegram y el modelo del asistente. Detalle en [`backend/README.md`](backend/README.md) |
+| `backend/` | API Gateway NestJS: validación, correo de solicitudes y el modelo del asistente. Detalle en [`backend/README.md`](backend/README.md) |
 | `instrucciones.md` | Plan de reestructuración que originó este layout. Es la referencia de qué va en cada carpeta y qué queda reservado |
 | `.githooks/pre-commit` | Corta el commit si algo con forma de credencial entró al índice |
 | `.gitattributes` | Finales de línea LF en el repositorio, para que editar desde Windows no genere diffs falsos |
@@ -178,8 +178,8 @@ Las dificultades del paso 4 y las fichas de la sección *Problemas* son la misma
 lista: marcar en una deja marcada la otra.
 
 Las opciones de los cuatro pasos son listas cerradas y viven en
-`backend/src/common/catalogos.ts`. El DTO valida contra ellas y el resumen de
-Telegram las usa sin repetirlas: **si el formulario suma una opción, se agrega
+`backend/src/common/catalogos.ts`. El DTO valida contra ellas y el correo de
+la solicitud las usa sin repetirlas: **si el formulario suma una opción, se agrega
 ahí**. Lo que no calce se descarta en silencio, porque no es un error de quien
 escribe sino un cliente manipulado.
 
@@ -254,7 +254,7 @@ reserva. Se reparten al cargar desde variables de entorno.
 | Ruta del backend | `frontend/.env.local` (`VITE_API_BASE_URL`) |
 | Redes sociales | Dos sitios: el bloque `.social` de la sección de contacto y la columna `.social-rail` al final del `<body>`, en ambas páginas. Los `href="#contacto"` son marcadores |
 | Razón social y datos tributarios | `terminos.html`, secciones 01 y 18 |
-| Credenciales de Telegram y del asistente | `backend/.env` — nunca en el frontend |
+| Claves de Resend (correo) y del asistente | `backend/.env` — nunca en el frontend |
 | Dominio permitido por CORS | `backend/.env` (`CORS_ORIGIN`) |
 | Precios y plazos | `frontend/seo/precios.js` — la tabla y los datos estructurados salen de ahí |
 | Verificación de buscadores | Variables del proyecto en Vercel: `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` |

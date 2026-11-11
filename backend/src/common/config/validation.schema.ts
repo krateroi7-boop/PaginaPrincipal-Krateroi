@@ -21,8 +21,12 @@ export const validationSchema = Joi.object({
   PORT: Joi.number().default(3000),
   CORS_ORIGIN: Joi.string().required(),
 
-  TELEGRAM_BOT_TOKEN: Joi.string().required(),
-  TELEGRAM_CHAT_ID: Joi.string().required(),
+  // Las solicitudes del formulario llegan por correo (Resend, por
+  // HTTPS). Sin clave no habría por dónde entregarlas, así que el
+  // backend no arranca.
+  RESEND_API_KEY: Joi.string().required(),
+  CORREO_DESTINO: Joi.string().email().default('krateroi7@gmail.com'),
+  CORREO_REMITENTE: Joi.string().default('Krateroi <onboarding@resend.dev>'),
 
   // El asistente del sitio. El backend no arranca sin ella: es
   // preferible fallar al inicio que descubrirlo con un visitante

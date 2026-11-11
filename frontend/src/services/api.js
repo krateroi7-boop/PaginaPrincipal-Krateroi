@@ -1,10 +1,9 @@
 /* -------------------------------------------------------------
    Comunicación con el backend (API Gateway).
 
-   Reemplaza los dos fetch que el sitio estático hacía desde el
-   navegador con credenciales a la vista: el de Telegram para el
-   formulario y el de Gemini para el asistente. Acá el navegador
-   sólo habla con nuestro backend, que es quien conoce los tokens.
+   El navegador sólo habla con nuestro backend: él entrega por correo
+   las solicitudes del formulario y consulta a Gemini para el
+   asistente, y es el único que conoce las claves.
 
    Nada de este archivo debe conocer una credencial. Si algún día
    hace falta una, va en backend/.env.
@@ -12,7 +11,7 @@
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
-/* El formulario responde apenas Telegram acusa recibo. El asistente
+/* El formulario responde apenas el servicio de correo acusa recibo. El asistente
    espera a que el modelo razone, y el backend además reintenta los
    500 del proveedor, así que necesita bastante más margen.
 
@@ -23,7 +22,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
    que venía en camino y el visitante vería un error donde no lo hubo.
    Con 45 s pasaba justamente eso en cuanto el backend reintentaba. */
 // Render puede tardar en despertar; 10 s cortaba una solicitud valida
-// antes de que Telegram recibiera el aviso.
+// antes de que saliera el correo.
 const TIMEOUT_CONSULTA = 60000;
 const TIMEOUT_CHAT = 90000;
 
@@ -31,7 +30,7 @@ const TIMEOUT_CHAT = 90000;
    proveedor es el backend, y hacerlo también acá multiplicaba la espera
    por dos -hasta tres minutos mirando el indicador de escritura- sobre
    un proveedor que ya venía lento. Repetir la consulta del formulario
-   tampoco: podría dejar dos avisos iguales en Telegram si el primero
+   tampoco: podría dejar dos correos iguales si el primero
    llegó y se perdió la respuesta. */
 const INTENTOS_CHAT = 1;
 const ESPERA_MS = 800;
@@ -101,7 +100,7 @@ async function pedir(ruta, cuerpo, { timeout, intentos = 1, porDefecto }) {
 }
 
 /** Solicitud del formulario por etapas. El backend valida los datos
-    y entrega el informe PDF por Telegram. */
+    y la entrega por correo con el informe PDF. */
 const SERVICIOS_LEGALES = new Map([
   ['Protección de datos personales', 'Protección de datos'],
   ['Ciberseguridad legal', 'Ciberseguridad legal'],
