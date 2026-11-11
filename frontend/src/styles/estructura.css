@@ -522,13 +522,16 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 
 /* Dos filas que avanzan solas, la segunda en sentido contrario. Cada
    pista tiene su grupo dos veces, así que desplazarla la mitad deja todo
-   igual que al principio. Se detiene al pasar el puntero o el foco. */
+   igual que al principio. Es decorado de fondo: bajo contraste, no
+   responde al puntero y nunca se detiene. */
 .section.tecnologias {
   display: grid;
   gap: .75rem;
   padding-block: 2rem;
   background: #dfe8f6;
   border-block: 1px solid #cbd7e8;
+  pointer-events: none;
+  user-select: none;
 }
 .tecnologias .stack-marquee {
   margin: 0;
@@ -543,20 +546,19 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 }
 .tecnologias .stack-marquee--inversa .stack-track { animation-direction: reverse; animation-duration: 90s; }
 .tecnologias .stack-marquee:hover .stack-track,
-.tecnologias .stack-marquee:focus-within .stack-track { animation-play-state: paused; }
+.tecnologias .stack-marquee:focus-within .stack-track { animation-play-state: running; }
 @keyframes cinta { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .tecnologias .stack-group { display: flex; flex-wrap: nowrap; align-items: center; gap: .6rem; padding-right: .6rem; }
 .tecnologias .stack-group span {
   padding: .5rem 1rem;
-  border: 1px solid #c3d3ea;
+  border: 1px solid rgb(23 59 112 / .13);
   border-radius: var(--r-md);
-  background: #f3f7fd;
-  color: #173b70;
+  background: transparent;
+  color: rgb(23 59 112 / .38);
   font-size: .84rem;
   font-weight: 600;
   white-space: nowrap;
 }
-.tecnologias .stack-group span:hover { border-color: #295da4; color: #0d2b69; }
 
 @media (max-width: 600px) {
   .section.tecnologias { gap: .55rem; padding-block: 1.5rem; }
