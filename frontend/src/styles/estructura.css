@@ -347,12 +347,6 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 .chips-foot { justify-content: center; text-align: center; }
 .chips-foot p { margin-right: 0; }
 
-.limits { align-items: center; text-align: center; }
-#soluciones .limits { border-left: 0; border-top: 3px solid #295da4; }
-.limits ul { justify-items: center; }
-.limits li { padding-left: 0; }
-.limits li::before { position: static; display: inline-block; margin-right: .55rem; vertical-align: middle; }
-
 .flow-text {
   grid-template-columns: minmax(0, 1fr) !important;
   justify-items: center;
@@ -522,4 +516,191 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
 }
 @media (prefers-reduced-motion: reduce) {
   .vitrina-doc:hover .mini-hoja, .vitrina-doc:focus-visible .mini-hoja { transform: none; }
+}
+
+/* -- CINTA DE TECNOLOGÍAS ------------------------------------- */
+
+/* Dos filas que avanzan solas, la segunda en sentido contrario. Cada
+   pista tiene su grupo dos veces, así que desplazarla la mitad deja todo
+   igual que al principio. Se detiene al pasar el puntero o el foco. */
+.section.tecnologias {
+  display: grid;
+  gap: .75rem;
+  padding-block: 2rem;
+  background: #dfe8f6;
+  border-block: 1px solid #cbd7e8;
+}
+.tecnologias .stack-marquee {
+  margin: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.tecnologias .stack-track {
+  display: flex;
+  width: max-content;
+  animation: cinta 64s linear infinite;
+}
+.tecnologias .stack-marquee--inversa .stack-track { animation-direction: reverse; animation-duration: 90s; }
+.tecnologias .stack-marquee:hover .stack-track,
+.tecnologias .stack-marquee:focus-within .stack-track { animation-play-state: paused; }
+@keyframes cinta { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tecnologias .stack-group { display: flex; flex-wrap: nowrap; align-items: center; gap: .6rem; padding-right: .6rem; }
+.tecnologias .stack-group span {
+  padding: .5rem 1rem;
+  border: 1px solid #c3d3ea;
+  border-radius: var(--r-md);
+  background: #f3f7fd;
+  color: #173b70;
+  font-size: .84rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.tecnologias .stack-group span:hover { border-color: #295da4; color: #0d2b69; }
+
+@media (max-width: 600px) {
+  .section.tecnologias { gap: .55rem; padding-block: 1.5rem; }
+  .tecnologias .stack-group span { padding: .4rem .8rem; font-size: .78rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tecnologias .stack-marquee { mask-image: none; -webkit-mask-image: none; }
+  .tecnologias .stack-track { width: auto; animation: none; justify-content: center; }
+  .tecnologias .stack-group { flex-wrap: wrap; justify-content: center; padding-inline: 1rem; }
+  .tecnologias .stack-group[aria-hidden="true"] { display: none; }
+}
+
+/* -- PORTADA: NOTA DE LA AUDITORÍA ---------------------------- */
+
+.hero-con-fondo .hero-nota {
+  max-width: 34rem;
+  margin: 1.4rem auto 0;
+  font-size: .88rem;
+  line-height: 1.55;
+  color: #b8c9e6;
+  text-align: center;
+}
+
+/* -- PRECIOS POR GRUPO ---------------------------------------- */
+
+/* Cada grupo de servicios lleva un solo rango en UF y sus acciones;
+   los trabajos pequeños siguen en la tabla en pesos. */
+.precios-grupos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+.precio-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .45rem;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid #4c6ca4;
+  border-radius: .5rem;
+  background: rgba(255, 255, 255, .05);
+  text-align: center;
+}
+.precio-grupo h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+.precio-grupo-rango { font-size: clamp(1.5rem, 2.4vw, 1.85rem); font-weight: 700; line-height: 1.15; letter-spacing: -.03em; color: #fff; }
+.precio-grupo-plazo { font-size: .82rem; font-weight: 600; color: #93c5fd; }
+.precio-grupo ul {
+  display: grid;
+  gap: .5rem;
+  width: 100%;
+  margin-top: .75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.precio-grupo li { font-size: .9rem; line-height: 1.45; color: #cbd5e1; }
+.precio-inicial-valor { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+
+/* -- CONDICIONES ---------------------------------------------- */
+
+@media (min-width: 1100px) {
+  .condiciones-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* -- FORMULARIO ----------------------------------------------- */
+
+/* Más aire: caja más ancha, una columna central y tarjetas grandes.
+   Primero lo escrito, después las opciones. */
+/* Alto fijo: el panel no cambia de tamaño al pasar de un paso a otro */
+.solicitud-caja { width: min(66rem, 100%); height: min(54rem, 100%); }
+.solicitud-head { padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 1.25rem; }
+.solicitud-pasos {
+  justify-content: center;
+  gap: .5rem 1.75rem;
+  padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
+  font-size: .82rem;
+}
+.solicitud-cuerpo { padding: clamp(1.75rem, 4.5vw, 3rem) clamp(1.25rem, 5vw, 3.5rem); }
+.solicitud-pie { padding: 1.15rem clamp(1.25rem, 4vw, 2.5rem) 1.35rem; }
+
+.paso { max-width: 50rem; margin-inline: auto; }
+.paso-titulo { font-size: clamp(1.35rem, 2.6vw, 1.75rem); text-align: center; }
+.paso-guia { max-width: 36rem; margin: .6rem auto 0; font-size: .98rem; line-height: 1.6; text-align: center; }
+.paso-subtitulo {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font-size: 1rem;
+  font-weight: 650;
+  text-align: center;
+  color: #e7efff;
+}
+.paso .field { margin-top: 1.75rem; }
+.field-principal textarea { min-height: 10rem; padding: 1rem 1.1rem; font-size: 1rem; line-height: 1.6; }
+.paso .field-row { gap: 1.25rem; }
+.paso .field-row + .field-row { margin-top: .25rem; }
+
+.opciones { gap: .9rem; margin-top: 1.5rem; }
+.opciones-compactas { grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.opciones [hidden] { display: none !important; }
+.opcion { gap: .4rem; padding: 1.1rem 2.75rem 1.15rem 1.15rem; }
+.opcion b { font-size: .98rem; }
+.opcion span { font-size: .86rem; }
+.opcion::after { top: 1.1rem; right: 1.05rem; }
+.opciones[data-grupo="servicios"] .service-group-title { margin: 1.5rem 0 .2rem; padding-top: 1.1rem; }
+.opciones[data-grupo="servicios"] .service-group-title:first-child { margin-top: 0; padding-top: 0; }
+
+/* Tipo de apoyo: tres tarjetas grandes, una fase propia */
+.opciones-apoyo { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.opcion-apoyo {
+  align-items: center;
+  gap: .55rem;
+  min-height: 13rem;
+  justify-content: center;
+  padding: 2rem 1.35rem 1.75rem;
+  text-align: center;
+}
+.opcion-apoyo b { font-size: 1.15rem; }
+.opcion-apoyo span { max-width: 15rem; font-size: .88rem; }
+.opcion-icono { width: 1.9rem; height: 1.9rem; margin-bottom: .2rem; color: #93c5fd; }
+.opcion-apoyo[aria-pressed="true"] { border-color: #93c5fd; background: rgba(96, 165, 250, .18); }
+
+.addendum { margin-top: 2.25rem; }
+.nota-pago {
+  margin-top: 1.75rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(147, 197, 253, .35);
+  border-radius: .75rem;
+  background: rgba(96, 165, 250, .08);
+  font-size: .9rem;
+  line-height: 1.55;
+  color: #dbe6f7;
+  text-align: center;
+}
+.nota-pago b { color: #fff; }
+.paso .consent { margin-top: 1.25rem; }
+
+@media (max-width: 560px) {
+  .solicitud-caja { height: 100%; }
+}
+@media (max-width: 760px) {
+  .opciones-apoyo { grid-template-columns: minmax(0, 1fr); }
+  .opcion-apoyo { min-height: 0; padding: 1.5rem 1.25rem; }
+  /* En pantallas angostas sólo el paso actual lleva su nombre */
+  .solicitud-pasos { gap: .5rem .9rem; }
+  .solicitud-pasos li:not(.activo) { font-size: 0; gap: 0; }
 }

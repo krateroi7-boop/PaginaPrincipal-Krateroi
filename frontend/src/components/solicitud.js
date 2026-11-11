@@ -2,9 +2,15 @@
    Solicitud por etapas.
 
    El formulario vive en un panel que se abre sobre la misma página y
-   avanza de a un paso: servicio, ubicación, formato de reunión y
-   necesidad. Preguntar de a poco baja el abandono frente a un
-   formulario largo mostrado de una vez.
+   avanza de a un paso: la necesidad (primero lo escrito, debajo las
+   opciones), el tipo de apoyo (tecnológico, legal o ambos), los
+   servicios de esa área, ubicación y reunión, y los datos de contacto.
+   Preguntar de a poco baja el abandono frente a un formulario largo
+   mostrado de una vez.
+
+   El tipo de apoyo sólo ordena el recorrido: decide qué servicios se
+   ven en el paso 3. No viaja al backend como campo propio, porque la
+   validación de allá rechaza campos que no conoce.
 
    Lo que cambió al pasar al framework: el envío ya no habla con la
    API de Telegram desde el navegador. Se manda al backend, que
@@ -38,7 +44,7 @@ const CUPO = {
     'Recibimos varias solicitudes tuyas hoy. Te contactamos nosotros, o escríbenos por WhatsApp.',
 };
 
-const PASOS = 4;
+const PASOS = 5;
 
 /* Campos de texto del formulario, en el orden en que aparecen. La
    lista es explícita para no guardar nunca un campo que se agregue
@@ -52,9 +58,16 @@ const CAMPOS = [
   'f-telefono',
 ];
 
-const GRUPOS = ['servicios', 'ubicacion', 'reunion', 'dolores'];
+const GRUPOS = ['dolores', 'apoyo', 'servicios', 'ubicacion', 'reunion'];
 
-const NOMBRE_PASO = ['', 'Servicio', 'Ubicación', 'Reunión', 'Tu necesidad'];
+const NOMBRE_PASO = ['', 'Tu necesidad', 'Tipo de apoyo', 'Servicios', 'Ubicación y reunión', 'Tus datos'];
+
+/* Qué áreas de servicios muestra cada tipo de apoyo */
+const AREAS = {
+  'Tecnológico': ['tecnologico'],
+  Legal: ['legal'],
+  Ambos: ['tecnologico', 'legal'],
+};
 
 /* El guardado espera a que la persona deje de escribir: una escritura
    por tecla llenaría localStorage de trabajo inútil. */
@@ -132,19 +145,28 @@ export function iniciarSolicitud() {
       caja.classList.remove('invalid');
       limpiarEstado();
 
-      if (caja.getAttribute('data-grupo') === 'dolores') sincronizarChips();
+      const nombre = caja.getAttribute('data-grupo');
+      if (nombre === 'dolores') sincronizarChips();
+      if (nombre === 'apoyo') aplicarApoyo();
     });
   });
 
-  $$('[data-ir-servicio]', form).forEach((boton) => {
-    boton.addEventListener('click', () => {
-      const destino = document.getElementById(boton.dataset.irServicio);
-      destino?.scrollIntoView({ block: 'start', behavior: 'auto' });
+  /* Muestra en el paso 3 sólo los servicios del área elegida. Lo que
+     quede oculto se desmarca, para no enviar un servicio que la persona
+     ya no ve. Sin elección todavía se muestran las dos áreas. */
+  function aplicarApoyo() {
+    const caja = grupo('servicios');
+    if (!caja) return;
+    const visibles = AREAS[marcados('apoyo')[0]] || ['tecnologico', 'legal'];
+    $$('[data-area]', caja).forEach((el) => {
+      const ver = visibles.includes(el.getAttribute('data-area'));
+      el.hidden = !ver;
+      if (!ver && el.classList.contains('opcion')) el.setAttribute('aria-pressed', 'false');
     });
-  });
+  }
 
   /* -- PROBLEMAS DE LA SECCIÓN "PROBLEMAS" --------------------
-     Las fichas de más arriba y las tarjetas del paso 4 son la misma
+     Las fichas de más arriba y las tarjetas del paso 1 son la misma
      lista: marcar en una deja marcada la otra, para que nadie tenga
      que elegir dos veces lo mismo. */
 
@@ -152,7 +174,7 @@ export function iniciarSolicitud() {
   const contador = $('#contadorChips');
 
   /* La ficha lleva su descripción dentro, así que el texto visible ya
-     no sirve para emparejarla con la tarjeta del paso 4: manda
+     no sirve para emparejarla con la tarjeta del paso 1: manda
      `data-valor`, que es además lo que valida el backend. */
   const valorChip = (chip) => chip.getAttribute('data-valor') || '';
 
@@ -162,7 +184,7 @@ export function iniciarSolicitud() {
     contador.textContent = n === 1 ? '1 seleccionado' : `${n} seleccionados`;
   }
 
-  /* De las tarjetas del paso 4 hacia las fichas de la sección */
+  /* De las tarjetas del paso 1 hacia las fichas de la sección */
   function sincronizarChips() {
     if (!contenedorChips) return;
     const activos = marcados('dolores');
@@ -197,7 +219,7 @@ export function iniciarSolicitud() {
   /* -- BORRADOR: GUARDAR Y RETOMAR ---------------------------
      Cada respuesta se anota en el navegador. Al volver, el formulario
      ya viene con lo que había y se abre en el paso donde se dejó, en
-     vez de obligar a rehacer los cuatro pasos. */
+     vez de obligar a rehacer los pasos anteriores. */
 
   let retomado = false;
   let seFueDelSitio = false;
@@ -292,6 +314,7 @@ export function iniciarSolicitud() {
       const consent = $('#f-consent');
       if (consent) consent.checked = !!datos.consentimiento;
 
+      aplicarApoyo();
       sincronizarChips();
     } finally {
       restaurando = false;
@@ -318,6 +341,7 @@ export function iniciarSolicitud() {
       $$('.opcion').forEach((o) => o.setAttribute('aria-pressed', 'false'));
       $$('.opciones').forEach((c) => c.classList.remove('invalid'));
       $$('.field.invalid').forEach((c) => c.classList.remove('invalid'));
+      aplicarApoyo();
       sincronizarChips();
     } finally {
       restaurando = false;
@@ -438,7 +462,35 @@ export function iniciarSolicitud() {
      que la persona tiene delante. Las mismas reglas corren de nuevo
      en el backend, que es el que decide. */
   function validarPaso(n) {
+    /* Paso 1: la necesidad, escrita o marcada */
     if (n === 1) {
+      const dolores = marcados('dolores');
+      const mensaje = valor('f-mensaje');
+      const rMensaje = mensaje ? revisar(mensaje, 2000) : { ok: true, motivo: '' };
+
+      marcarError('f-mensaje', !!mensaje && !rMensaje.ok);
+      if (!rMensaje.ok) return { ok: false, motivo: `La descripción ${rMensaje.motivo}.` };
+      if (!dolores.length && mensaje.length < 10) {
+        marcarGrupo('dolores', true);
+        return {
+          ok: false,
+          motivo: 'Cuéntanos tu situación en el recuadro o marca lo que reconozcas de la lista.',
+        };
+      }
+      return { ok: true, motivo: '' };
+    }
+
+    /* Paso 2: el tipo de apoyo */
+    if (n === 2) {
+      if (!marcados('apoyo').length) {
+        marcarGrupo('apoyo', true);
+        return { ok: false, motivo: 'Elige si buscas apoyo tecnológico, legal o ambos.' };
+      }
+      return { ok: true, motivo: '' };
+    }
+
+    /* Paso 3: los servicios */
+    if (n === 3) {
       const otro = valor('f-servicio-otro');
       if (otro) {
         const rOtro = revisar(otro, 120);
@@ -458,7 +510,8 @@ export function iniciarSolicitud() {
       return { ok: true, motivo: '' };
     }
 
-    if (n === 2) {
+    /* Paso 4: ubicación y formato de la conversación */
+    if (n === 4) {
       if (!marcados('ubicacion').length) {
         marcarGrupo('ubicacion', true);
         return {
@@ -466,10 +519,6 @@ export function iniciarSolicitud() {
           motivo: 'Dinos dónde está tu empresa para saber si podemos vernos en persona.',
         };
       }
-      return { ok: true, motivo: '' };
-    }
-
-    if (n === 3) {
       if (!marcados('reunion').length) {
         marcarGrupo('reunion', true);
         return { ok: false, motivo: 'Elige cómo prefieres que conversemos.' };
@@ -477,23 +526,9 @@ export function iniciarSolicitud() {
       return { ok: true, motivo: '' };
     }
 
-    /* Paso 4: la necesidad, más los datos para poder responder */
+    /* Paso 5: los datos para poder responder */
     const problemas = [];
     const fallas = [];
-
-    const dolores = marcados('dolores');
-    const mensaje = valor('f-mensaje');
-    const rMensaje = mensaje ? revisar(mensaje, 2000) : { ok: true, motivo: '' };
-
-    marcarError('f-mensaje', !!mensaje && !rMensaje.ok);
-    if (!rMensaje.ok) problemas.push(`La descripción ${rMensaje.motivo}.`);
-    else if (!dolores.length && mensaje.length < 10) {
-      marcarGrupo('dolores', true);
-      return {
-        ok: false,
-        motivo: 'Marca lo que reconozcas de la lista o cuéntanoslo en el recuadro.',
-      };
-    }
 
     const nombre = valor('f-nombre');
     const rNombre = nombre ? revisar(nombre, 80) : { ok: false, motivo: '' };
@@ -521,7 +556,7 @@ export function iniciarSolicitud() {
     return { ok: true, motivo: '' };
   }
 
-  /* Al enviar se revisan los cuatro pasos, no sólo el visible: si
+  /* Al enviar se revisan todos los pasos, no sólo el visible: si
      algo quedó atrás, el panel vuelve a ese paso y explica qué falta,
      en vez de mandar una solicitud incompleta. */
   function validarTodo() {
@@ -540,7 +575,7 @@ export function iniciarSolicitud() {
       '.paso:not([hidden]) .field.invalid input, .paso:not([hidden]) .field.invalid textarea',
     );
     if (primero) primero.focus();
-    else if (pasoActual === 4 && !$('#f-consent').checked) $('#f-consent').focus();
+    else if (pasoActual === PASOS && !$('#f-consent').checked) $('#f-consent').focus();
   }
 
   function limpiarEstado() {
@@ -551,15 +586,16 @@ export function iniciarSolicitud() {
   }
 
   function textoGuia() {
-    return pasoActual === 4
-      ? 'Revisa que todo esté bien y envíanos la solicitud.'
-      : 'Elige al menos una opción para continuar.';
+    if (pasoActual === 1) return 'Escribe tu situación o marca lo que reconozcas para continuar.';
+    if (pasoActual === PASOS) return 'Revisa que todo esté bien y envíanos la solicitud.';
+    return 'Elige una opción para continuar.';
   }
 
   /* -- NAVEGACIÓN ------------------------------------------ */
 
   function irA(n) {
     pasoActual = n;
+    if (n === 3) aplicarApoyo();
 
     $$('.paso', form).forEach((seccion) => {
       seccion.hidden = parseInt(seccion.getAttribute('data-paso'), 10) !== n;
@@ -685,6 +721,11 @@ export function iniciarSolicitud() {
     return datos;
   }
 
+  /* El informe PDF es local, así que además lleva el tipo de apoyo */
+  function datosInforme() {
+    return { ...datosSolicitud(), apoyo: marcados('apoyo')[0] || '' };
+  }
+
   /* El mismo resumen que arma el backend para Telegram. Acá se usa
      para copiarlo o mandarlo por WhatsApp cuando el envío falla. */
   function armarResumen() {
@@ -698,6 +739,7 @@ export function iniciarSolicitud() {
       `Empresa: ${d.empresa || '-'}`,
       `Teléfono: ${d.telefono || '-'}`,
       '',
+      `Tipo de apoyo: ${marcados('apoyo')[0] || '-'}`,
       `Servicios: ${d.servicios.length ? d.servicios.join(', ') : '-'}`,
     ];
 
@@ -750,7 +792,7 @@ export function iniciarSolicitud() {
       await enviarConsulta(datos);
       limites.anotar('contacto');
       try {
-        ultimoInforme = await crearInformePDF(datos);
+        ultimoInforme = await crearInformePDF(datosInforme());
         descargarInforme(ultimoInforme);
       } catch (errorInforme) {
         console.error('No se pudo crear el informe PDF:', errorInforme);
@@ -892,7 +934,7 @@ export function iniciarSolicitud() {
       return;
     }
     try {
-      ultimoInforme ||= await crearInformePDF(datosSolicitud());
+      ultimoInforme ||= await crearInformePDF(datosInforme());
       descargarInforme(ultimoInforme);
     } catch (error) {
       console.error('No se pudo descargar el informe:', error);

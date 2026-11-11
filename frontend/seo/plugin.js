@@ -11,7 +11,7 @@
      y Bing Webmaster Tools si están en el entorno.
    - Publica robots.txt, sitemap.xml y la clave de IndexNow en la raíz. */
 
-import { GRUPOS } from './precios.js';
+import { GRUPOS_UF, TRABAJOS_PEQUENOS } from './precios.js';
 
 export const INDEXNOW_KEY = '455f056a97d3109ebe2d2590e7c07473';
 
@@ -37,49 +37,76 @@ const escapar = (texto) =>
 
 const miles = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-function monto(item) {
-  if (item.clp) return `$${miles(item.clp)}`;
-  const uf = `${String(item.uf).replace('.', ',')} UF`;
-  return item.mensual ? `${uf} al mes` : uf;
+const uf = (n) => `${String(n).replace('.', ',')} UF`;
+
+/* "12 a 26 UF", o "Desde 3 UF" cuando el grupo no tiene tope. Que el
+   cobro es mensual lo dice la línea de plazo del mismo grupo. */
+function rangoUF(grupo) {
+  const [desde, hasta] = grupo.uf;
+  return grupo.desde || hasta === undefined ? `Desde ${uf(desde)}` : `${desde} a ${uf(hasta)}`;
 }
 
+/* Grupos de servicios con un solo rango en UF, y los trabajos pequeños
+   en pesos con su valor individual. */
 function tablaPrecios() {
-  return GRUPOS.map((grupo) => {
-    const filas = grupo.items
-      .map(
-        (item) => `
+  const grupos = GRUPOS_UF.map(
+    (g) => `
+        <article class="precio-grupo reveal">
+          <h3>${escapar(g.titulo)}</h3>
+          <p class="precio-grupo-rango">${escapar(rangoUF(g))}</p>
+          <p class="precio-grupo-plazo">${escapar(g.plazo)}</p>
+          <ul>${g.acciones.map((a) => `<li>${escapar(a)}</li>`).join('')}</ul>
+        </article>`,
+  ).join('');
+
+  const filas = TRABAJOS_PEQUENOS.items
+    .map(
+      (item) => `
           <tr>
             <th scope="row">${escapar(item.nombre)}</th>
             <td class="precio-alcance">${escapar(item.alcance)}</td>
             <td class="precio-plazo">${escapar(item.plazo)}</td>
-            <td class="precio-monto"><small>Desde</small> ${escapar(monto(item))}</td>
+            <td class="precio-monto"><small>Desde</small> $${miles(item.clp)}</td>
           </tr>`,
-      )
-      .join('');
-    const enPesos = grupo.items.every((item) => item.clp);
-    return `
+    )
+    .join('');
+
+  return `
+      <div class="precios-grupos">${grupos}
+      </div>
       <table class="precios-tabla reveal">
-        <caption>${escapar(grupo.titulo)}${enPesos ? ' <span>en pesos</span>' : ''}</caption>
+        <caption>${escapar(TRABAJOS_PEQUENOS.titulo)} <span>en pesos</span></caption>
         <thead>
           <tr><th scope="col">Servicio</th><th scope="col">Incluye</th><th scope="col">Plazo</th><th scope="col">Valor neto</th></tr>
         </thead>
         <tbody>${filas}
         </tbody>
       </table>`;
-  }).join('');
 }
 
-function oferta(item, sitio) {
-  const precio = item.clp
-    ? { '@type': 'PriceSpecification', minPrice: item.clp, priceCurrency: 'CLP' }
-    : item.mensual
-      ? { '@type': 'UnitPriceSpecification', minPrice: item.uf, priceCurrency: 'CLF', unitCode: 'MON', unitText: 'mes' }
-      : { '@type': 'PriceSpecification', minPrice: item.uf, priceCurrency: 'CLF' };
+function servicio(nombre, descripcion, sitio) {
+  return { '@type': 'Service', name: nombre, description: descripcion, provider: { '@id': `${sitio}/#organizacion` } };
+}
+
+function ofertaGrupo(g, sitio) {
+  const [desde, hasta] = g.uf;
+  const precio = g.mensual
+    ? { '@type': 'UnitPriceSpecification', minPrice: desde, priceCurrency: 'CLF', unitCode: 'MON', unitText: 'mes' }
+    : { '@type': 'PriceSpecification', minPrice: desde, ...(hasta !== undefined && { maxPrice: hasta }), priceCurrency: 'CLF' };
   return {
     '@type': 'Offer',
     url: `${sitio}/#precios`,
-    itemOffered: { '@type': 'Service', name: item.nombre, description: item.alcance, provider: { '@id': `${sitio}/#organizacion` } },
+    itemOffered: servicio(g.titulo, g.acciones.join(', '), sitio),
     priceSpecification: { ...precio, valueAddedTaxIncluded: false },
+  };
+}
+
+function ofertaPequena(item, sitio) {
+  return {
+    '@type': 'Offer',
+    url: `${sitio}/#precios`,
+    itemOffered: servicio(item.nombre, item.alcance, sitio),
+    priceSpecification: { '@type': 'PriceSpecification', minPrice: item.clp, priceCurrency: 'CLP', valueAddedTaxIncluded: false },
   };
 }
 
@@ -114,13 +141,11 @@ function datosEstructurados(sitio, env) {
         {
           '@type': 'Offer',
           url: `${sitio}/#precios`,
-          price: 0,
-          priceCurrency: 'CLP',
-          itemOffered: { '@type': 'Service', name: 'Auditoría inicial', description: 'Primera lectura del caso, por escrito y sin obligación de continuar.' },
+          description: 'No se paga al pedirla; su valor se cobra junto con el proyecto si el trabajo se concreta.',
+          itemOffered: servicio('Auditoría inicial', 'Primera lectura del caso y de sus prioridades.', sitio),
         },
-        ...GRUPOS.flatMap((grupo) =>
-          grupo.items.map((item) => oferta(item, sitio)),
-        ),
+        ...GRUPOS_UF.map((g) => ofertaGrupo(g, sitio)),
+        ...TRABAJOS_PEQUENOS.items.map((item) => ofertaPequena(item, sitio)),
       ],
     },
   };

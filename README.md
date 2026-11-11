@@ -70,8 +70,14 @@ Están acordadas con el cliente. No revertirlas sin que las levante:
 - **Sin logotipo ni nombre de marca visible.** Donde iría el logo hay casillas de
   reserva punteadas con un aspa, como en cualquier wireframe.
 - **Sin trabajos anteriores, sin testimonios ni clientes inventados.** Los
-  precios sí se publican desde octubre de 2026: en UF, salvo los trabajos
-  pequeños, que van en pesos, y la auditoría inicial, que es gratuita.
+  precios sí se publican desde octubre de 2026. Desde noviembre de 2026 los
+  servicios en UF se muestran sólo como un rango por grupo, nunca el valor
+  de cada servicio; los trabajos pequeños van en pesos con su valor. La
+  auditoría inicial no se paga al pedirla: su valor se cobra junto con el
+  proyecto si el trabajo se concreta.
+- **Sólo lo estratégico.** La página explica qué se hace y para qué, pero no
+  publica el método operativo de Krateroi (pasos internos, herramientas,
+  entregables detallados).
 - **Sin inicio de sesión, registro ni cuentas.** El sitio no crea usuarios ni
   guarda sesiones.
 - **Liviano.** Llega tráfico desde redes sociales: la portada no hace ninguna

@@ -51,14 +51,6 @@ body { background: #03194f; }
 .service-path--legal { border-color: #0d2b69; background: #0d2b69; color: #f5f8ff; }
 .service-path--legal:hover { border-color: #1c4b96; background: #1c4b96; }
 
-/* Tecnología como nota de taller, sin animación ni triplicación visible. */
-.section.compacta { padding-block: 1.5rem; background: #dfe8f6; border-color: #cbd7e8; color: #12315e; }
-.compacta .container { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 2rem; }
-.stack-marquee { overflow: visible; }
-.stack-track { transform: none !important; animation: none !important; display: block; width: auto; }
-.stack-group { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.4rem; }
-.stack-group[aria-hidden="true"] { display: none; }
-.stack-group span { color: #173b70; font-size: .82rem; font-weight: 600; }
 
 /* El equipo y el proceso tienen una composición textual, más cercana a un estudio. */
 .nosotros { background: #092766; }
@@ -79,9 +71,6 @@ body { background: #03194f; }
 #soluciones .solution .icon-badge { grid-column: 1; grid-row: 1 / span 2; width: 2.45rem; height: 2.45rem; border: 1px solid #bdd0eb; background: #e4edfb; color: #235ba8; border-radius: .25rem; }
 #soluciones .solution h3 { grid-column: 2; margin: .1rem 0 .5rem; font-size: 1.16rem; line-height: 1.25; color: #102654; }
 #soluciones .solution p { grid-column: 2; grid-row: 2; margin: 0; color: #536077; font-size: .88rem; line-height: 1.62; }
-#soluciones .limits { margin-top: 3rem; border: 0; border-left: 3px solid #295da4; border-radius: 0; background: #e6eef9; color: #102654; box-shadow: none; backdrop-filter: none; }
-#soluciones .limits p, #soluciones .limits li { color: #536077; }
-#soluciones .limits li::before { background: #295da4; }
 
 /* El trabajo legal tiene una superficie distinta al catálogo técnico. */
 .legal-services { background: #0d2b69; color: #f5f8ff; }

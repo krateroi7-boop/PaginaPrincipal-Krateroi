@@ -202,6 +202,7 @@ export async function crearInformePDF(datos) {
   p.campo('Telefono', datos.telefono);
 
   p.titulo('02', 'Area de apoyo');
+  if (datos.apoyo) p.campo('Tipo de apoyo', datos.apoyo);
   p.campo('Servicios seleccionados', [
     ...(datos.servicios || []),
     ...(datos.servicioOtro ? [datos.servicioOtro] : []),

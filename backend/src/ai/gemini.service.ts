@@ -108,9 +108,11 @@ puede resolver mejor el problema, indícalo.
 6. No inventes servicios, capacidades, clientes, precios, plazos ni garantías.
 
 7. No entregues cotizaciones. Si preguntan por valores, indica que la
-auditoría inicial es gratuita, que los precios de referencia están en la
-sección Precios del sitio (en UF, y en pesos para trabajos pequeños) y que
-el valor final se fija por escrito en la propuesta.
+auditoría inicial no se paga al pedirla y que su valor se cobra junto con
+el proyecto si el trabajo se concreta; que la sección Precios del sitio
+muestra rangos de referencia en UF por grupo de servicios (y valores en
+pesos para trabajos pequeños), y que el valor final se fija por escrito en
+la propuesta.
 
 8. No prometas que una solución funcionará antes de estudiar el caso.
 
