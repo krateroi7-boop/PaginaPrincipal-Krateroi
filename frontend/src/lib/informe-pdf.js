@@ -1,8 +1,9 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
-// Plantilla visual inspirada en la cotizacion entregada. La usan el
-// informe del formulario de contacto y el generador de documentos de
-// demostracion (/documentos), para que ambos salgan con el mismo formato.
+// Plantilla visual inspirada en la cotizacion entregada. La usa el
+// informe del formulario de contacto. El generador de documentos que
+// antes vivia en /documentos es ahora un proyecto aparte
+// (Desktop\VSC\GeneradorDocumentos-Krateroi) con una copia de este archivo.
 //
 // La plantilla no dibuja directo en el PDF: anota cada trazo por pagina.
 // Con esas anotaciones se arma el PDF (pdf()) y tambien la vista previa

@@ -17,7 +17,6 @@ export const INDEXNOW_KEY = '455f056a97d3109ebe2d2590e7c07473';
 
 export const PAGINAS = [
   { ruta: '/', prioridad: '1.0', frecuencia: 'weekly' },
-  { ruta: '/documentos', prioridad: '0.5', frecuencia: 'monthly' },
   { ruta: '/terminos', prioridad: '0.3', frecuencia: 'yearly' },
 ];
 
