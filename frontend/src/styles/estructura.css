@@ -405,6 +405,155 @@ footer .brand-pie .brand-logo { width: auto; height: clamp(4rem, 9vw, 5.25rem); 
   .faq-sign { right: 1rem; }
 }
 
+/* -- METODOLOGÍA ---------------------------------------------- */
+
+/* Tres tarjetas unidas por una línea con nodos numerados; la línea se
+   dibuja cuando la sección entra en pantalla (navegacion.js agrega
+   .in). Detrás, una retícula de puntos que se desvanece hacia los
+   bordes. Sin brillos ni sombras. */
+#metodologia { position: relative; overflow: hidden; }
+#metodologia::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(147, 197, 253, .18) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 25%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 25%, transparent 78%);
+  pointer-events: none;
+}
+#metodologia .container { position: relative; }
+
+.fases {
+  position: relative;
+  display: grid;
+  margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.fase { display: flex; flex-direction: column; align-items: center; }
+.fase + .fase::before { content: ''; width: 1px; height: 1.75rem; background: #7394c9; }
+.fase-nodo {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border: 1px solid #7394c9;
+  border-radius: 50%;
+  background: #0a2763;
+  font: 700 .8rem var(--mono);
+  letter-spacing: .04em;
+  color: #93c5fd;
+}
+
+.fase-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  width: 100%;
+  padding: 2rem 1.5rem 1.6rem;
+  border: 1px solid #4c6ca4;
+  border-top: 2px solid #60a5fa;
+  border-radius: .5rem;
+  background: rgba(255, 255, 255, .05);
+  text-align: center;
+  overflow: hidden;
+}
+.fase-fondo {
+  position: absolute;
+  top: -.9rem;
+  right: .5rem;
+  font-size: 7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.06em;
+  color: rgba(147, 197, 253, .07);
+  pointer-events: none;
+}
+.fase-icono {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-bottom: .35rem;
+  border: 1px solid rgba(147, 197, 253, .35);
+  border-radius: .5rem;
+  background: rgba(96, 165, 250, .1);
+  color: #93c5fd;
+}
+.fase-etapa { font: 700 .72rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #93c5fd; }
+.fase-card h3 { font-size: 1.3rem; letter-spacing: -.02em; }
+.fase-texto { max-width: 22rem; font-size: .92rem; line-height: 1.6; color: #cbd5e1; }
+.fase-lista {
+  display: grid;
+  gap: .55rem;
+  width: 100%;
+  margin: .6rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  list-style: none;
+}
+/* El visto va en línea con el texto: si la frase se parte en dos
+   líneas, queda pegado a la primera y no suelto en el borde. */
+.fase-lista li { font-size: .88rem; line-height: 1.45; color: #dbe6f7; text-wrap: balance; }
+.fase-lista li::before {
+  content: '';
+  display: inline-block;
+  width: .32rem;
+  height: .6rem;
+  margin-right: .6rem;
+  border: solid #60a5fa;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-.12rem) rotate(45deg);
+}
+.fase-resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+}
+.fase-resultado span { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #9fb0c9; }
+.fase-resultado b {
+  padding: .35rem .9rem;
+  border: 1px solid rgba(147, 197, 253, .4);
+  border-radius: 999px;
+  background: rgba(96, 165, 250, .12);
+  font-size: .85rem;
+  font-weight: 600;
+  color: #fff;
+}
+.fases-cierre { display: flex; justify-content: center; margin-top: clamp(2rem, 4vw, 2.75rem); }
+
+@media (min-width: 960px) {
+  .fases { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  .fase + .fase::before { display: none; }
+  /* Va del centro del primer nodo al del último */
+  .fases::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: calc((100% - 3rem) / 6);
+    right: calc((100% - 3rem) / 6);
+    height: 1px;
+    background: #7394c9;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 900ms cubic-bezier(.22, 1, .36, 1) 150ms;
+  }
+  .fases.in::before { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fases::before { transform: none; transition: none; }
+}
+
 /* -- CINTA DE TECNOLOGÍAS ------------------------------------- */
 
 /* Dos filas que avanzan solas, la segunda en sentido contrario. Cada

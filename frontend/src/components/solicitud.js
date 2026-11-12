@@ -2,8 +2,8 @@
    Solicitud por etapas.
 
    El formulario vive en un panel que se abre sobre la misma página y
-   avanza de a un paso: la necesidad (primero lo escrito, debajo las
-   opciones), el tipo de apoyo (tecnológico, legal o ambos), los
+   avanza de a un paso: el tipo de apoyo (tecnológico, legal o ambos),
+   la necesidad (primero lo escrito, debajo las opciones), los
    servicios de esa área, ubicación y reunión, y los datos de contacto.
    Preguntar de a poco baja el abandono frente a un formulario largo
    mostrado de una vez.
@@ -57,9 +57,9 @@ const CAMPOS = [
   'f-telefono',
 ];
 
-const GRUPOS = ['dolores', 'apoyo', 'servicios', 'ubicacion', 'reunion'];
+const GRUPOS = ['apoyo', 'dolores', 'servicios', 'ubicacion', 'reunion'];
 
-const NOMBRE_PASO = ['', 'Tu necesidad', 'Tipo de apoyo', 'Servicios', 'Ubicación y reunión', 'Tus datos'];
+const NOMBRE_PASO = ['', 'Tipo de apoyo', 'Tu necesidad', 'Servicios', 'Ubicación y reunión', 'Tus datos'];
 
 /* Qué áreas de servicios muestra cada tipo de apoyo */
 const AREAS = {
@@ -165,7 +165,7 @@ export function iniciarSolicitud() {
   }
 
   /* -- PROBLEMAS DE LA SECCIÓN "PROBLEMAS" --------------------
-     Las fichas de más arriba y las tarjetas del paso 1 son la misma
+     Las fichas de más arriba y las tarjetas del paso 2 son la misma
      lista: marcar en una deja marcada la otra, para que nadie tenga
      que elegir dos veces lo mismo. */
 
@@ -173,7 +173,7 @@ export function iniciarSolicitud() {
   const contador = $('#contadorChips');
 
   /* La ficha lleva su descripción dentro, así que el texto visible ya
-     no sirve para emparejarla con la tarjeta del paso 1: manda
+     no sirve para emparejarla con la tarjeta del paso 2: manda
      `data-valor`, que es además lo que valida el backend. */
   const valorChip = (chip) => chip.getAttribute('data-valor') || '';
 
@@ -183,7 +183,7 @@ export function iniciarSolicitud() {
     contador.textContent = n === 1 ? '1 seleccionado' : `${n} seleccionados`;
   }
 
-  /* De las tarjetas del paso 1 hacia las fichas de la sección */
+  /* De las tarjetas del paso 2 hacia las fichas de la sección */
   function sincronizarChips() {
     if (!contenedorChips) return;
     const activos = marcados('dolores');
@@ -461,8 +461,17 @@ export function iniciarSolicitud() {
      que la persona tiene delante. Las mismas reglas corren de nuevo
      en el backend, que es el que decide. */
   function validarPaso(n) {
-    /* Paso 1: la necesidad, escrita o marcada */
+    /* Paso 1: el tipo de apoyo */
     if (n === 1) {
+      if (!marcados('apoyo').length) {
+        marcarGrupo('apoyo', true);
+        return { ok: false, motivo: 'Elige si buscas apoyo tecnológico, legal o ambos.' };
+      }
+      return { ok: true, motivo: '' };
+    }
+
+    /* Paso 2: la necesidad, escrita o marcada */
+    if (n === 2) {
       const dolores = marcados('dolores');
       const mensaje = valor('f-mensaje');
       const rMensaje = mensaje ? revisar(mensaje, 2000) : { ok: true, motivo: '' };
@@ -475,15 +484,6 @@ export function iniciarSolicitud() {
           ok: false,
           motivo: 'Cuéntanos tu situación en el recuadro o marca lo que reconozcas de la lista.',
         };
-      }
-      return { ok: true, motivo: '' };
-    }
-
-    /* Paso 2: el tipo de apoyo */
-    if (n === 2) {
-      if (!marcados('apoyo').length) {
-        marcarGrupo('apoyo', true);
-        return { ok: false, motivo: 'Elige si buscas apoyo tecnológico, legal o ambos.' };
       }
       return { ok: true, motivo: '' };
     }
@@ -585,7 +585,7 @@ export function iniciarSolicitud() {
   }
 
   function textoGuia() {
-    if (pasoActual === 1) return 'Escribe tu situación o marca lo que reconozcas para continuar.';
+    if (pasoActual === 2) return 'Escribe tu situación o marca lo que reconozcas para continuar.';
     if (pasoActual === PASOS) return 'Revisa que todo esté bien y envíanos la solicitud.';
     return 'Elige una opción para continuar.';
   }
